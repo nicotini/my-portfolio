@@ -1,0 +1,84 @@
+<template>
+    <main class="main">
+            <!-- Side Nav Dummy-->
+            <div class="main__sideNav"></div>
+            <!-- End Side Nav -->
+            <!-- Main Content -->
+            <div class="main__content">
+                <section class="about section" id="about">
+                    <div class="about_container">
+                        <div class="titlebar">
+                            <div class="titlebar_item">
+                                <h1>About</h1>
+                            </div>
+                            <div class="titlebar_item">
+                                <div class="btn btn-secondary">
+                                    <router-link :to="{name: 'admin.about.create'}">
+                                        Create about section
+                                    </router-link>
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+                    <div class="table">
+                            <div class="education_table-heading">
+                                <p>Full name</p> 
+                                <p>Email</p>
+                                <p>Phone</p>
+                                <p>Social media</p>
+                                <p>Description</p>
+                                <p>Actions</p>
+                            </div>
+                        <!-- item 1 -->
+                            <div class="education_table-items" v-if="aboutInfo">
+                                <p>{{ this.aboutInfo.name }}</p>
+                                <p>{{ this.aboutInfo.email }}</p>
+                                <p>{{ this.aboutInfo.phone }}</p>
+                                <p>{{ this.aboutInfo.social_alias }}</p>
+                                <p class="truncate-desc">{{ this.aboutInfo.desc }}</p>
+                                <div>
+                                    <router-link :to="{name:'admin.about.edit', params: {id:aboutInfo.id}}" class="btn-icon success" > 
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </router-link>
+                                    <button class="btn-icon danger" @click.prevent="deleteAbout(aboutInfo.id)" >
+                                        <i class="far fa-trash-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    
+                </section>
+            </div>
+    </main>
+</template>
+<script>
+import axios from 'axios'
+
+export default {
+    name: "index",
+    data() {
+        return {
+           aboutInfo : null
+        }
+    },
+    methods: {
+        
+        getAboutInfo() {
+           axios.get('/api/about').then( res => {
+            this.aboutInfo = res.data.data
+           
+           })
+        }, 
+        deleteAbout(id) {
+            axios.delete(`/api/about/${id}`).then( res => {
+                this.getAboutInfo()
+            })
+        }
+    },
+    mounted() {
+        this.getAboutInfo()
+    }
+
+}
+</script>

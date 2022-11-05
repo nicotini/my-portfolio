@@ -17,13 +17,16 @@ window.axios.interceptors.response.use(
     response => response
 , 
  error => {
-    console.log(error.response)
+   /*  console.log(error.response) */
     if(error.response.status === 401 || error.response.status === 419) {
         const token = localStorage.getItem('x_xsrf_token')
         if(token) {
             localStorage.removeItem('x_xsrf_token')
         }
         router.push({name: 'auth.login'})
+    }
+    if(error.response.status === 422) {
+        
     }
     return Promise.reject(error)
 });

@@ -18,6 +18,33 @@ const routes = [
         
     },
     {
+        path: '/admin/about',
+        component: ()=> import('../components/admin/about/index.vue'),
+        name: 'admin.about.index',
+        meta: { 
+            layout: 'AppLayoutAdmin' 
+        }
+        
+    },
+    {
+        path: '/admin/about/create',
+        component: ()=> import('../components/admin/about/create.vue'),
+        name: 'admin.about.create',
+        meta: { 
+            layout: 'AppLayoutAdmin' 
+        }
+        
+    },
+    {
+        path: '/admin/about/:id/edit',
+        component: ()=> import('../components/admin/about/edit.vue'),
+        name: 'admin.about.edit',
+        meta: { 
+            layout: 'AppLayoutAdmin' 
+        }
+        
+    },
+    {
         path: '/personal',
         component: ()=> import('../components/admin/home/personal.vue'),
         name: 'admin.home.personal',
