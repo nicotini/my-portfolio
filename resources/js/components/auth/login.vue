@@ -43,7 +43,7 @@ export default {
                 axios.post('/login', {email: this.email, password: this.password})
                 .then(res => {
                    store.dispatch('setToken',res.config.headers['X-XSRF-TOKEN'])
-                    this.$router.push({name: 'admin.home.personal'})
+                    this.$router.push({name: 'admin.home.index'})
                 })
                 .catch( err => {
                     console.log(err.response)

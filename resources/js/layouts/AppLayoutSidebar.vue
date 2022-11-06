@@ -7,24 +7,24 @@
                 </span>
                 <ul class="nav_list">
                     <li class="nav_item">
-                        <a class="nav_link nav__active" href="#">
+                        <router-link class="nav_link " :to="{name: 'admin.home.index' }">
                             <span class="nav_link--span--icon">
                                 <i class="fas fa-home nav__link--icon"> </i>
                             </span>
                             <span class="nav_link--span--navname">
                                 Home
                             </span>
-                        </a>
+                        </router-link>
                     </li>
                     <li class="nav_item">
-                        <a class="nav_link " href="about.html">
+                        <router-link class="nav_link " :to="{name: 'admin.about.index' }">
                             <span class="nav_link--span--icon">
                                 <i class="fas fa-home nav__link--icon"> </i>
                             </span>
                             <span class="nav_link--span--navname">
-                                About Us
+                                About 
                             </span>
-                        </a>
+                        </router-link>
                     </li>
                     <li class="nav_item">
                         <a class="nav_link " href="service.html">

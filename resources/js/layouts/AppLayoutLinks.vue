@@ -29,7 +29,7 @@
                 My portfolio project
             </div>
             <div>
-                <router-link class="header_profile-name--nav--link" :to="{name: 'pages.home.index'}">Portfolio</router-link>
+                <router-link class="header_profile-name--nav--link" :to="{name: 'pages.home.index'}">Back to website</router-link>
             </div>
             <div class="header_profile">
                 <a class="header_profile-name--nav--link" href="#" @click.prevent="logout">
