@@ -45,6 +45,15 @@ const routes = [
         
     },
     {
+        path: '/admin/services',
+        component: ()=> import('../components/admin/services/index.vue'),
+        name: 'admin.services.index',
+        meta: { 
+            layout: 'AppLayoutAdmin' 
+        }
+        
+    },
+    {
         path: '/personal',
         component: ()=> import('../components/admin/home/personal.vue'),
         name: 'admin.home.personal',
@@ -53,6 +62,7 @@ const routes = [
         }
         
     },
+    
     {
         path: '/login',
         component: ()=> import('../components/auth/login.vue'),
