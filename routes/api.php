@@ -18,6 +18,7 @@ use App\Http\Controllers\API\Skill\IndexController as SkillIndexController;
 use App\Http\Controllers\API\Skill\StoreController as SkillStoreController;
 use App\Http\Controllers\API\Skill\ShowController as SkillShowController;
 use App\Http\Controllers\API\Skill\UpdateController as SkillUpdateController;
+use App\Http\Controllers\API\Skill\DeleteController as SkillDeleteController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -56,6 +57,7 @@ Route::middleware('auth:sanctum')->group( function() {
         Route::get('/', SkillIndexController::class);
         Route::get('/{skill}', SkillShowController::class);
         Route::patch('/{skill}', SkillUpdateController::class);
+        Route::delete('/{skill}', SkillDeleteController::class);
         
     });
 

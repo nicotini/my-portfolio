@@ -66,7 +66,7 @@
                                         <button class="btn-icon success" @click.prevent="editModal(skill.id)">
                                             <i class="fas fa-pencil-alt"></i>
                                         </button>
-                                        <button class="btn-icon danger" >
+                                        <button class="btn-icon danger" @click.prevent="deleteSkill(skill.id)">
                                             <i class="far fa-trash-alt"></i>
                                         </button>
                                     </div>
@@ -213,6 +213,28 @@ import axios from 'axios';
                         this.errors = error.response.data.errors
                     }
                 })
+            },
+            deleteSkill(id) {
+                Swal.fire({
+                title: 'Are you sure?',
+                text: "You can't go back",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtomText: 'Yes, delete it!'
+            }).then( res => {
+                    if(res) {
+                        axios.delete(`/api/skill/${id}`).then( res => {
+                            Swal.fire(
+                                'Delete',
+                                'Skill has deleted successfully',
+                                'success'
+                            )
+                            this.getSkills()
+                        })
+                    }
+                }) 
             }
             
         },
