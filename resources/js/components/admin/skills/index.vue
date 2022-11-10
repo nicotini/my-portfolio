@@ -12,7 +12,7 @@
                                 <h1>Skills </h1>
                             </div>
                             <div class="titlebar_item">
-                                <div class="btn btn__open--modal">
+                                <div class="btn btn__open--modal" @click.prevent="openModal">
                                     New Skill
                                 </div>
                             </div> 
@@ -76,30 +76,32 @@
                         
                     </div>
                     <!-------------- SERVICES MODAL --------------->
-                    <div class="modal main__modal " >
+                    <div class="modal main__modal " :class="{show: showModal}" >
                         <div class="modal__content">
-                            <span class="modal__close btn__close--modal" >×</span>
+                            <span class="modal__close btn__close--modal" @click.prevent="closeModal" >×</span>
                             <h3 class="modal__title">Add Skill</h3>
                             <hr class="modal_line"><br>
                             <div>
-                                <p>Name</p>
-                                <input type="text" class="input" />
+                                <p>Title</p>
+                                <input type="text" v-model="form.title" class="input" />
 
                                 <p>Proficiency</p>
-                                <input type="text" class="input" />
+                                <input type="text" v-model="form.proficiency" class="input" />
                             
-                                <p>Service</p>
-                                <select class="inputSelect" name="" id="">
-                                    <option value="">Front-end developer</option>
-                                    <option value="">Backend developer</option>
+                                <p> select a Service</p>
+                                <select class="inputSelect" v-model="form.service_id">
+                                    <option disabled>Select service</option>
+                                    <option :value="service.id" v-for="service in services" :key="service.id">
+                                       {{ service.title }}
+                                    </option>
                                 </select>
                             </div>
                             <br><hr class="modal_line">
                             <div class="model__footer">
-                                <button class="btn mr-2 btn__close--modal" @click="closeModal()">
+                                <button class="btn mr-2 btn__close--modal" @click="closeModal">
                                     Cancel
                                 </button>
-                                <button class="btn btn-secondary btn__close--modal ">Save</button>
+                                <button class="btn btn-secondary btn__close--modal " @click.prevent="createSkill">Save</button>
                             </div>
                         </div>
                     </div>
@@ -115,20 +117,54 @@ import axios from 'axios';
         data() {
             return {
                 skills: {},
+                showModal: false,
+                hideModal: true,
+                form: {
+                    title: null,
+                    proficiency: null,
+                    service_id: null
+                },
+                services: {}
                 
             }
         },
         methods: {
             getSkills() {
                 axios.get('/api/skill').then( res => {
-                    console.log(res.data.data)
                     this.skills = res.data.data
                 })
             },
+            openModal() {
+                this.showModal = !this.showModal
+            },
+            closeModal() {
+                this.showModal = !this.hideModal
+            },
+            getServices() {
+                axios.get('/api/service').then(res => {
+                    this.services = res.data.data
+                })
+            },
+            createSkill() {
+                axios.post('/api/skill/', {
+                    title: this.form.title,
+                    proficiency: this.form.proficiency,
+                    service_id: this. form.service_id
+                }).then( res => {
+                    this.getSkills()
+                    this.closeModal()
+                    this.form = {}
+                    toast.fire({
+                        icon: 'success',
+                        title: 'Skill has added succsessfully'
+                    })
+                })
+            }
             
         },
         mounted() {
             this.getSkills()
+            this.getServices()
         }
 
         
