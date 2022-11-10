@@ -63,7 +63,7 @@
                                     </div>
                                     <p v-if="skill.service_title">{{ skill.service_title }}</p>
                                     <div>
-                                        <button class="btn-icon success">
+                                        <button class="btn-icon success" @click.prevent="editModal(skill.id)">
                                             <i class="fas fa-pencil-alt"></i>
                                         </button>
                                         <button class="btn-icon danger" >
@@ -79,8 +79,17 @@
                     <div class="modal main__modal " :class="{show: showModal}" >
                         <div class="modal__content">
                             <span class="modal__close btn__close--modal" @click.prevent="closeModal" >×</span>
-                            <h3 class="modal__title">Add Skill</h3>
+                            <h3 v-if="editMode == false" class="modal__title">Add Skill</h3>
+                            <h3  v-if="editMode == true" class="modal__title">Update Skill</h3>
                             <hr class="modal_line"><br>
+                            <div v-if="errors">
+                                <div v-for="(field, k) in errors" :key="k">
+                                    
+                                    <p v-for="error in field" :key="error">
+                                        {{error}}
+                                    </p>
+                                </div>
+                            </div>
                             <div>
                                 <p>Title</p>
                                 <input type="text" v-model="form.title" class="input" />
@@ -101,7 +110,8 @@
                                 <button class="btn mr-2 btn__close--modal" @click="closeModal">
                                     Cancel
                                 </button>
-                                <button class="btn btn-secondary btn__close--modal " @click.prevent="createSkill">Save</button>
+                                <button :disabled="!isDisabled" v-if="editMode == false" class="btn btn-secondary btn__close--modal " @click.prevent="createSkill">Save</button>
+                                <button :disabled="!isDisabled" v-if="editMode == true" class="btn btn-secondary btn__close--modal " @click.prevent="updateSkill(form.id)">Update</button>
                             </div>
                         </div>
                     </div>
@@ -124,7 +134,10 @@ import axios from 'axios';
                     proficiency: null,
                     service_id: null
                 },
-                services: {}
+                services: {},
+                editMode: false,
+                errors: {}
+                
                 
             }
         },
@@ -136,9 +149,11 @@ import axios from 'axios';
             },
             openModal() {
                 this.showModal = !this.showModal
+                this.editMode = false
             },
             closeModal() {
                 this.showModal = !this.hideModal
+                this.form = {}
             },
             getServices() {
                 axios.get('/api/service').then(res => {
@@ -149,15 +164,54 @@ import axios from 'axios';
                 axios.post('/api/skill/', {
                     title: this.form.title,
                     proficiency: this.form.proficiency,
-                    service_id: this. form.service_id
+                    service_id: this.form.service_id
                 }).then( res => {
                     this.getSkills()
                     this.closeModal()
-                    this.form = {}
                     toast.fire({
                         icon: 'success',
                         title: 'Skill has added succsessfully'
                     })
+                }).catch( error => {
+                    if(error.response.status === 422) {
+                        this.errors = error.response.data.errors
+                    }
+                })
+            },
+            editModal(id) {
+                this.editMode = true
+                this.showModal = !this.showModal
+                this.getSkill(id)
+                /* console.log(id) */
+
+            },
+            getSkill(id) {
+                axios.get(`/api/skill/${id}`)
+                .then( res => {
+                    this.form.id = res.data.data.id,
+                    this.form.title = res.data.data.title,
+                    this.form.proficiency = res.data.data.proficiency,
+                    this.form.service_id  = res.data.data.service_id 
+                })
+            },
+            updateSkill(id) {
+                axios.patch(`/api/skill/${id}`, {
+                    title: this.form.title,
+                    proficiency: this.form.proficiency,
+                    service_id: this.form.service_id 
+                    
+                }).then( res => {
+                    console.log(this.form.service_id)
+                    this.getSkills()
+                    this.closeModal()
+                    toast.fire({
+                        icon: 'success',
+                        title: 'Skill has updated succsessfully'
+                    })
+                }).catch( error => {
+                    if(error.response.status === 422) {
+                        this.errors = error.response.data.errors
+                    }
                 })
             }
             
@@ -165,6 +219,13 @@ import axios from 'axios';
         mounted() {
             this.getSkills()
             this.getServices()
+        },
+        computed: {
+            isDisabled() {
+                return this.form.title &&
+                this.form.proficiency &&
+                this.form.service_id
+            }
         }
 
         
