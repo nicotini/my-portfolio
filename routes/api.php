@@ -13,6 +13,8 @@ use App\Http\Controllers\API\Service\StoreController as ServiceStoreController;
 use App\Http\Controllers\API\Service\ShowController as ServiceShowController;
 use App\Http\Controllers\API\Service\UpdateController as ServiceUpdateController;
 use App\Http\Controllers\API\Service\DeleteController as ServiceDeleteController;
+
+use App\Http\Controllers\API\Skill\IndexController as SkillIndexController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -44,6 +46,12 @@ Route::middleware('auth:sanctum')->group( function() {
         Route::get('/{service}', ServiceShowController::class);
         Route::patch('/{service}', ServiceUpdateController::class);
         Route::delete('/{service}', ServiceDeleteController::class); 
+    });
+
+    Route::prefix('skill')->group( function() {
+        
+        Route::get('/', SkillIndexController::class);
+        
     });
 
 });
