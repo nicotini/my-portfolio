@@ -63,6 +63,15 @@ const routes = [
         
     },
     {
+        path: '/admin/education',
+        component: ()=> import('../components/admin/education/index.vue'),
+        name: 'admin.education.index',
+        meta: { 
+            layout: 'AppLayoutAdmin' 
+        }
+        
+    },
+    {
         path: '/personal',
         component: ()=> import('../components/admin/home/personal.vue'),
         name: 'admin.home.personal',
