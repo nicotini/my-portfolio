@@ -22,6 +22,9 @@ use App\Http\Controllers\API\Skill\DeleteController as SkillDeleteController;
 
 use App\Http\Controllers\API\Education\IndexController as EducationIndexController;
 use App\Http\Controllers\API\Education\StoreController as EducationStoreController;
+use App\Http\Controllers\API\Education\ShowController as EducationShowController;
+use App\Http\Controllers\API\Education\UpdateController as EducationUpdateController;
+use App\Http\Controllers\API\Education\DeleteController as EducationDeleteController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -67,7 +70,9 @@ Route::middleware('auth:sanctum')->group( function() {
     Route::prefix('education')->group( function() {
         Route::post('/', EducationStoreController::class);
         Route::get('/', EducationIndexController::class);
-       
+        Route::get('/{education}', EducationShowController::class);
+        Route::patch('/{education}', EducationUpdateController::class);
+        Route::delete('/{education}', EducationDeleteController::class);
     });
 
 });

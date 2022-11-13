@@ -61,10 +61,10 @@
                                 <p>{{ education.degree }}</p>
                                 <p>{{ education.department }}</p>
                                 <div>
-                                    <button class="btn-icon success">
+                                    <button class="btn-icon success" @click="editModal(education.id)">
                                         <i class="fas fa-pencil-alt"></i>
                                     </button>
-                                    <button class="btn-icon danger" >
+                                    <button class="btn-icon danger" @click.prevent="deleteEducation(education.id)" >
                                         <i class="far fa-trash-alt"></i>
                                     </button>
                                 </div>
@@ -77,8 +77,17 @@
                 <div class="modal main__modal " :class="{show: showModal}" >
                     <div class="modal__content">
                         <span class="modal__close btn__close--modal" @click.prevent="closeModal" >×</span>
-                        <h3 class="modal__title">Add Education</h3>
+                        <h3 class="modal__title" v-if="editMode == false">Add Education</h3>
+                        <h3 class="modal__title" v-if="editMode == true">Update Education</h3>
                         <hr class="modal_line"><br>
+                        <div v-if="errors">
+                                <div v-for="(field, k) in errors" :key="k">
+                                    
+                                    <p v-for="error in field" :key="error">
+                                        {{error}}
+                                    </p>
+                                </div>
+                            </div>
                         <div>
                             <p>Institution</p>
                             <input type="text" class="input" v-model="form.institution" />
@@ -98,7 +107,8 @@
                             <button class="btn mr-2 btn__close--modal" @click="closeModal()">
                                 Cancel
                             </button>
-                            <button class="btn btn-secondary btn__close--modal " @click.prevent="createEducation">Save</button>
+                            <button :disabled="!isDisabled" class="btn btn-secondary btn__close--modal " v-if="editMode == false"  @click.prevent="createEducation">Save</button>
+                            <button :disabled="!isDisabled" class="btn btn-secondary btn__close--modal " v-if="editMode == true"  @click.prevent="updateEducation(form.id)">Update</button>
                         </div>
                     </div>
                 </div>
@@ -122,7 +132,9 @@ export default {
                 period: null,
                 degree: null,
                 department: null
-            }
+            },
+            editMode: false,
+            errors: {}
         }
     },
     methods: {
@@ -133,6 +145,7 @@ export default {
             })
         },
         openModal() {
+            this.editMode = false
             this.showModal = !this.showModal
         },
         closeModal() {
@@ -152,11 +165,77 @@ export default {
                         icon: 'success',
                         title: 'Education has added succsessfully!'
                     })
+            }).catch( error => {
+                    if(error.response.status === 422) {
+                        this.errors = error.response.data.errors
+                    }
+                })
+        },
+        editModal(id) {
+            this.editMode = true
+            this.showModal = !this.showModal
+            this.getEducation(id)
+
+        },
+        getEducation(id) {
+            axios.get(`/api/education/${id}`)
+            .then( res => {
+                this.form.id = res.data.data.id,
+                this.form.institution = res.data.data.institution,
+                this.form.period = res.data.data.period,
+                this.form.degree = res.data.data.degree,
+                this.form.department = res.data.data.department
             })
+        },
+        updateEducation(id) {
+            axios.patch(`/api/education/${id}`, {
+                institution: this.form.institution,
+                period: this.form.period,
+                degree: this.form.degree,
+                department: this.form.department
+            }).then( res => {
+                this.getEducations()
+                this.closeModal()
+                toast.fire({
+                    icon: 'success',
+                    title: 'Education has updated succsessfully'
+                })
+            }).catch( error => {
+                    if(error.response.status === 422) {
+                        this.errors = error.response.data.errors
+                    }
+                })
+        },
+        deleteEducation(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You can't go back",
+                icon: 'warning'
+            }).then( res => {
+                     if(res) {
+                        axios.delete(`/api/education/${id}`).then( res => {
+                            Swal.fire(
+                                'Delete',
+                                'Education has deleted successfully',
+                                'success'
+                            )
+                            this.getEducations()
+                        })
+                    }
+                })  
+            }
+        },
+        mounted() {
+            this.getEducations();
+        },
+        computed: {
+            isDisabled() {
+                return this.form.institution &&
+                this.form.period &&
+                this.form.degree &&
+                this.form.department
+            }
         }
-    },
-    mounted() {
-        this.getEducations();
-    }
 }
 </script>
+
