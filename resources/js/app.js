@@ -7,7 +7,8 @@ window.Swal = Swal
 const toast = Swal.mixin({
     toast:true,
     position: 'top-end',
-    showConfirmButton: false,
+    /* showConfirmButton: false,
+    confirmButtomText: '', */
     timer: 3000,
     
 });

@@ -201,7 +201,7 @@ import axios from 'axios';
                     service_id: this.form.service_id 
                     
                 }).then( res => {
-                    console.log(this.form.service_id)
+                    //console.log(this.form.service_id)
                     this.getSkills()
                     this.closeModal()
                     toast.fire({

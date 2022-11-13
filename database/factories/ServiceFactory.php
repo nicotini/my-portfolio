@@ -17,7 +17,7 @@ class ServiceFactory extends Factory
     public function definition()
     {
         return [
-            'title'=> 'My new service',
+            'title'=> 'Backend developer',
             'icon' => 'uil uil-brackets-curly',
             'desc'=> 'Service description ...'
         ];
