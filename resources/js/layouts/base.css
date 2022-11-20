@@ -734,10 +734,17 @@ ul {
   justify-content: center;
 }
 
-.avatar_profile_img{
+.avatar_profile{
   width: 200px;
-  height: 200px;
-  border: 50%;
+  width: 100%;
+    
+}
+.input-image {
+  padding: 9px 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    width: 100%;
+    cursor: pointer;
 }
 .truncate-desc {
   width: 100%;
@@ -745,6 +752,7 @@ ul {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 
 /*==================== SERVICES ====================*/
 .services_container {

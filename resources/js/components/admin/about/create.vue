@@ -43,7 +43,11 @@
                                     <input type="text" class="input" v-model="form.social_alias" />
             
                                     <p>Description</p>
-                                    <textarea cols="10" rows="5" v-model="form.desc" ></textarea>  
+                                    <textarea cols="10" rows="5" v-model="form.desc" ></textarea>
+                                    <p>Upload your photo</p>
+                                    <div ref="dropzone" class="input-image">
+                                        Upload a photo
+                                    </div>
                                 </div>
                             </div>
                             </div>
@@ -62,7 +66,7 @@
     </main>
 </template>
 <script>
-
+import Dropzone from 'dropzone'
 
 export default {
     name: "create",
@@ -74,14 +78,23 @@ export default {
                 phone: null,
                 social_alias: null,
                 desc: null,
-                
+                dropzone: null
            },
+          
            errors: {},
         }
     },
+    mounted() {
+        this.form.dropzone = new Dropzone(this.$refs.dropzone, {
+        url: "/api/about",
+        autoProcessQueue:false,
+        maxFiles: 1,
+        addRemoveLinks:true
+       })
+    },
     methods: {
         store() {
-                axios.post('/api/about', {
+                /* axios.post('/api/about', {
                 name: this.form.name, 
                 email: this.form.email, 
                 phone: this.form.phone,
@@ -93,13 +106,31 @@ export default {
                         this.errors = error.response.data.errors
 
                     }
+                }) */
+                const data = new FormData()
+                const files = this.form.dropzone.getAcceptedFiles()
+                files.forEach( file => {
+                data.append('images[]', file)
+                this.form.dropzone.removeFile(file)
                 })
+                
+                data.append('name', this.form.name)
+                data.append('email', this.form.email)
+                data.append('phone', this.form.phone)
+                data.append('social_alias', this.form.social_alias)
+                data.append('desc', this.form.desc)
+                
+                axios.post('/api/about', data)
+                .then( res => {
+                    this.$router.push({name: 'admin.about.index'})
+                }).catch( error => {
+                    if(error.response.status === 422) {
+                        this.errors = error.response.data.errors
 
-           
-               
-           
-           
-        },
+                    }
+                })
+                
+            },
         
     
 
@@ -115,3 +146,9 @@ export default {
     }
 }
 </script>
+<style>
+.dz-success-mark,
+.dz-error-mark {
+    display: none;
+}
+</style>
