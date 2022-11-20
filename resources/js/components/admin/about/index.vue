@@ -23,18 +23,21 @@
                     <div class="table">
                             <div class="education_table-heading">
                                 <p>Full name</p> 
+                                
                                 <p>Email</p>
+                                <p>Image</p>
                                 <p>Phone</p>
-                                <p>Social media</p>
+                               <!--  <p>Social media</p> -->
                                 <p>Description</p>
                                 <p>Actions</p>
                             </div>
                         <!-- item 1 -->
                             <div class="education_table-items" v-if="aboutInfo">
                                 <p>{{ this.aboutInfo.name }}</p>
+                                <p><img class="pb-5" :src="this.aboutInfo.preview_url" /></p>
                                 <p>{{ this.aboutInfo.email }}</p>
                                 <p>{{ this.aboutInfo.phone }}</p>
-                                <p>{{ this.aboutInfo.social_alias }}</p>
+                                <!-- <p>{{ this.aboutInfo.social_alias }}</p> -->
                                 <p class="truncate-desc">{{ this.aboutInfo.desc }}</p>
                                 <div>
                                     <router-link :to="{name:'admin.about.edit', params: {id:aboutInfo.id}}" class="btn-icon success" > 
@@ -67,6 +70,7 @@ export default {
         getAboutInfo() {
            axios.get('/api/about').then( res => {
             this.aboutInfo = res.data.data
+            console.log(res.data.data)
            
            })
         }, 
