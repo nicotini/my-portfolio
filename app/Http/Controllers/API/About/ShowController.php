@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\API\About;
 
+use App\Http\Controllers\API\BaseController;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\About\AboutResource;
 use App\Models\About;
 use Illuminate\Http\Request;
 
-class ShowController extends Controller
+class ShowController extends BaseController
 {
     public function __invoke(About $about)
     {
