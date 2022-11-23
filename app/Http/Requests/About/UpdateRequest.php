@@ -30,6 +30,7 @@ class UpdateRequest extends FormRequest
             'phone' => 'required|min:11|numeric',
             'social_alias' => 'required|string',
             'images' => 'nullable|array',
+            'cvs' => 'nullable|array'
         ];
     }
 }

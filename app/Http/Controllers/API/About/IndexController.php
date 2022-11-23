@@ -12,7 +12,13 @@ class IndexController extends BaseController
 {
     public function __invoke()
     {
+        
         $aboutInfo = About::latest()->first();
-        return new AboutResource($aboutInfo);
+        if($aboutInfo) {
+            return new AboutResource($aboutInfo);
+        } else {
+            return response([]);
+        }
+       
     }
 }

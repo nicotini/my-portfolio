@@ -44,9 +44,13 @@
             
                                     <p>Description</p>
                                     <textarea cols="10" rows="5" v-model="form.desc" ></textarea>
-                                    <p>Upload your photo</p>
+                                    
                                     <div ref="dropzone" class="input-image">
                                         Upload a photo
+                                    </div>
+                                    
+                                    <div ref="dropzoneCv" class="input-image">
+                                        Upload your CV
                                     </div>
                                 </div>
                             </div>
@@ -60,9 +64,8 @@
                             </div>
                         </form>
                     </div>
-                    
-                </section>
-            </div>
+            </section>
+        </div>
     </main>
 </template>
 <script>
@@ -78,7 +81,8 @@ export default {
                 phone: null,
                 social_alias: null,
                 desc: null,
-                dropzone: null
+                dropzone: null,
+                dropzoneCv: null
            },
           
            errors: {},
@@ -90,28 +94,30 @@ export default {
         autoProcessQueue:false,
         maxFiles: 1,
         addRemoveLinks:true
-       })
+       }),
+       this.form.dropzoneCv = new Dropzone(this.$refs.dropzoneCv, {
+        url: "/api/about",
+        maxFiles: 1,
+        autoProcessQueue:false,
+        addRemoveLinks: true,
+        acceptedFiles: ".pdf"
+
+       }),
+       this.form.dropzone.on("maxfilesexceeded", function(file) { this.removeFile(file) }),
+       this.form.dropzoneCv.on("maxfilesexceeded", function(file) { this.removeFile(file) })
     },
     methods: {
         store() {
-                /* axios.post('/api/about', {
-                name: this.form.name, 
-                email: this.form.email, 
-                phone: this.form.phone,
-                social_alias: this.form.social_alias,
-                desc: this.form.desc }).then(res => {
-                  this.$router.push({name: 'admin.about.index'})  
-                }).catch( error => {
-                    if(error.response.status === 422) {
-                        this.errors = error.response.data.errors
-
-                    }
-                }) */
                 const data = new FormData()
                 const files = this.form.dropzone.getAcceptedFiles()
                 files.forEach( file => {
                 data.append('images[]', file)
                 this.form.dropzone.removeFile(file)
+                })
+                const cvs = this.form.dropzoneCv.getAcceptedFiles()
+                cvs.forEach( file => {
+                    data.append('cv[]', file)
+                    this.form.dropzoneCv.removeFile(file)
                 })
                 
                 data.append('name', this.form.name)
@@ -119,7 +125,6 @@ export default {
                 data.append('phone', this.form.phone)
                 data.append('social_alias', this.form.social_alias)
                 data.append('desc', this.form.desc)
-                
                 axios.post('/api/about', data)
                 .then( res => {
                     this.$router.push({name: 'admin.about.index'})
