@@ -26,6 +26,7 @@ class Service {
 
                 \Intervention\Image\Facades\Image::make($image)
                 ->encode('jpg', 50)
+                ->orientate()
                 ->fit(100, 100)
                 ->save(storage_path('app/public/images/'. $previewName));
                 
@@ -86,6 +87,7 @@ class Service {
         ]);
         \Intervention\Image\Facades\Image::make($image)
             ->encode('jpg', 50)
+            ->orientate()
             ->fit(100, 100)
             ->save(storage_path('app/public/images/'. $previewName));
 
