@@ -32,7 +32,8 @@
                                 <p>Actions</p>
                             </div>
                         <!-- item 1 -->
-                            <div class="education_table-items" v-if="aboutInfo">
+                        <template v-if="aboutInfo">
+                            <div class="education_table-items" >
                                 <p>{{ this.aboutInfo.name }}</p>
                                 <p><img class="pb-5" :src="this.aboutInfo.preview_url" /></p>
                                 <p>{{ this.aboutInfo.email }}</p>
@@ -48,6 +49,7 @@
                                     </button>
                                 </div>
                             </div>
+                        </template>
                         </div>
                     
                     
@@ -68,20 +70,43 @@ export default {
     methods: {
         
         getAboutInfo() {
-           axios.get('/api/about').then( res => {
-            this.aboutInfo = res.data.data
-            console.log(res.data.data)
-           
+                axios.get('/api/about').then( res => {
+                this.aboutInfo = res.data.data
+                //console.log(res.data.data)
            })
+            
+           
         }, 
         deleteAbout(id) {
-            axios.delete(`/api/about/${id}`).then( res => {
-                this.getAboutInfo()
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You can't go back",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                /* confirmButtomText: 'Yes, delete it!' */
+                }).then( res => {
+                    if(res) {
+                        axios.delete(`/api/about/${id}`)
+                        .then( res => {
+                            Swal.fire(
+                                    'Delete',
+                                    'About Info has deleted successfully',
+                                    'success'
+                                )
+                    this.getAboutInfo()
+                    })
+                }
             })
+           
         }
     },
     mounted() {
-        this.getAboutInfo()
+      
+            this.getAboutInfo()
+      
+        
     }
 
 }

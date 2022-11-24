@@ -745,6 +745,7 @@ ul {
     border-radius: 4px;
     width: 100%;
     cursor: pointer;
+    margin-top: 20px;
 }
 .truncate-desc {
   width: 100%;

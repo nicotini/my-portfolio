@@ -44,9 +44,12 @@
             
                                     <p>Description</p>
                                     <textarea cols="10" rows="5" v-model="form.desc" ></textarea>  
-                                    <p>Upload your photo</p>
+                                    
                                     <div ref="dropzone" class="input-image">
                                         Upload a photo
+                                    </div>
+                                    <div ref="dropzoneFile" class="input-image">
+                                        Upload your CV
                                     </div>
                                 </div>
                             </div>
@@ -80,7 +83,7 @@ export default {
                 social_alias: null,
                 desc: null,
                 dropzone: null,
-                /* idImageForDelete: null */
+                dropzoneFile:null
            },
            errors: {}
         }
@@ -96,33 +99,38 @@ export default {
                 this.form.email = res.data.data.email
                 this.form.phone = res.data.data.phone
                 this.form.social_alias = res.data.data.social_alias
+                this.form.path_cv = res.data.data.path_cv
+                this.form.url_cv = res.data.data.url_cv
+                this.form.size_cv = res.data.data.size_cv
+                this.form.name_cv = res.data.data.name_cv
                 this.form.preview_url = res.data.data.preview_url
                 this.form.size = res.data.data.size
                 this.form.file_name = res.data.data.file_name
-                let file = {id: this.form.id, name: this.form.file_name, size: this.form.size };
-                this.form.dropzone.displayExistingFile(file, this.form.preview_url);
+                if(this.form.preview_url) {
+                    let file = {id: this.form.id, name: this.form.file_name, size: this.form.size }
+                    this.form.dropzone.displayExistingFile(file, this.form.preview_url)
+                }
+                
+                if(res.data.data.path_cv) {
+                    let cvFile = {id: this.form.id, name: this.form.name_cv, size: this.form.size_cv }
+                    this.form.dropzoneFile.displayExistingFile(cvFile, this.form.path_cv);
+                }
+                
+                
             })
         },
         updateAbout() {
-            console.log(this.form.idImageForDelete)
-           /*  axios.patch(`/api/about/${this.$route.params.id}`, {  
-                name: this.form.name, 
-                email: this.form.email, 
-                phone: this.form.phone,
-                social_alias: this.form.social_alias,
-                desc: this.form.desc }).then( res => {
-                this.$router.push({name: 'admin.about.index'})
-            }).catch( error => {
-                    if(error.response.status === 422) {
-                        this.errors = error.response.data.errors
-
-                    }
-                }) */
                 const data = new FormData()
                 const files = this.form.dropzone.getAcceptedFiles()
                 files.forEach( file => {
                 data.append('images[]', file)
                 this.form.dropzone.removeFile(file)
+                })
+
+                const cvs = this.form.dropzoneFile.getAcceptedFiles()
+                cvs.forEach( file => {
+                    data.append('cvs[]',file)
+                    this.form.dropzoneFile.removeFile(file)
                 })
                 
                 data.append('name', this.form.name)
@@ -148,13 +156,22 @@ export default {
 
     },
     mounted() {
-        
         this.form.dropzone = new Dropzone(this.$refs.dropzone, {
-        url: "/api/about",
+        url: `/api/about/${this.$route.params.id}`,
         autoProcessQueue:false,
         maxFiles: 1,
         addRemoveLinks:true
        }),
+       this.form.dropzoneFile = new Dropzone(this.$refs.dropzoneFile, {
+        url: `/api/about/${this.$route.params.id}`,
+        maxFiles: 1,
+        autoProcessQueue:false,
+        addRemoveLinks: true,
+        acceptedFiles: ".pdf",
+        previewTemplate:'<div class="dz-preview dz-file-preview preview-cv"><div class="dz-details"><div class="dz-filename"><span data-dz-name></span></div><div class="dz-size" data-dz-size></div></div><div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div><div class="dz-error-message"><span data-dz-errormessage></span></div></div>'
+
+       }),
+      
 
       /*  this.form.dropzone.on('removedfile', (file) => {
         this.form.idImageForDelete = file.id
