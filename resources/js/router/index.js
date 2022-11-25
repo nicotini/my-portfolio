@@ -72,6 +72,15 @@ const routes = [
         
     },
     {
+        path: '/admin/experience',
+        component: ()=> import('../components/admin/experience/index.vue'),
+        name: 'admin.experience.index',
+        meta: { 
+            layout: 'AppLayoutAdmin' 
+        }
+        
+    },
+    {
         path: '/personal',
         component: ()=> import('../components/admin/home/personal.vue'),
         name: 'admin.home.personal',
