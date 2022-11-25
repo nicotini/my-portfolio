@@ -25,6 +25,12 @@ use App\Http\Controllers\API\Education\StoreController as EducationStoreControll
 use App\Http\Controllers\API\Education\ShowController as EducationShowController;
 use App\Http\Controllers\API\Education\UpdateController as EducationUpdateController;
 use App\Http\Controllers\API\Education\DeleteController as EducationDeleteController;
+
+use App\Http\Controllers\API\Experience\IndexController as ExperienceIndexController;
+use App\Http\Controllers\API\Experience\StoreController as ExperienceStoreController;
+use App\Http\Controllers\API\Experience\ShowController as ExperienceShowController;
+use App\Http\Controllers\API\Experience\UpdateController as ExperienceUpdateController;
+use App\Http\Controllers\API\Experience\DeleteController as ExperienceDeleteController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -73,6 +79,14 @@ Route::middleware('auth:sanctum')->group( function() {
         Route::get('/{education}', EducationShowController::class);
         Route::patch('/{education}', EducationUpdateController::class);
         Route::delete('/{education}', EducationDeleteController::class);
+    });
+
+    Route::prefix('experience')->group( function() {
+        Route::post('/', ExperienceStoreController::class);
+        Route::get('/', ExperienceIndexController::class);
+        Route::get('/{experience}', ExperienceShowController::class);
+        Route::patch('/{experience}', ExperienceUpdateController::class);
+        Route::delete('/{experience}', ExperienceDeleteController::class);
     });
 
 });
