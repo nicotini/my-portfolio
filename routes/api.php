@@ -31,6 +31,8 @@ use App\Http\Controllers\API\Experience\StoreController as ExperienceStoreContro
 use App\Http\Controllers\API\Experience\ShowController as ExperienceShowController;
 use App\Http\Controllers\API\Experience\UpdateController as ExperienceUpdateController;
 use App\Http\Controllers\API\Experience\DeleteController as ExperienceDeleteController;
+
+use App\Http\Controllers\API\Project\IndexController as ProjectIndexController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -87,6 +89,10 @@ Route::middleware('auth:sanctum')->group( function() {
         Route::get('/{experience}', ExperienceShowController::class);
         Route::patch('/{experience}', ExperienceUpdateController::class);
         Route::delete('/{experience}', ExperienceDeleteController::class);
+    });
+
+    Route:: prefix('project')->group( function() {
+        Route::get('/', ProjectIndexController::class);
     });
 
 });
