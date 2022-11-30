@@ -34,12 +34,12 @@
                         <!-- item 1 -->
                         <template v-if="aboutInfo">
                             <div class="education_table-items" >
-                                <p>{{ this.aboutInfo.name }}</p>
-                                <p><img class="pb-5" :src="this.aboutInfo.preview_url" /></p>
-                                <p>{{ this.aboutInfo.email }}</p>
-                                <p>{{ this.aboutInfo.phone }}</p>
+                                <p>{{ aboutInfo.name }}</p>
+                                <p><img class="pb-5" :src="aboutInfo.preview_url" /></p>
+                                <p>{{ aboutInfo.email }}</p>
+                                <p>{{ aboutInfo.phone }}</p>
                                 <!-- <p>{{ this.aboutInfo.social_alias }}</p> -->
-                                <p class="truncate-desc">{{ this.aboutInfo.desc }}</p>
+                                <p class="truncate-desc">{{ aboutInfo.desc }}</p>
                                 <div>
                                     <router-link :to="{name:'admin.about.edit', params: {id:aboutInfo.id}}" class="btn-icon success" > 
                                         <i class="fas fa-pencil-alt"></i>
