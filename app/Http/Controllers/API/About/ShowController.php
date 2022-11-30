@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\API\About;
 
-use App\Http\Controllers\API\BaseController;
+use App\Http\Controllers\API\About\BaseController;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\About\AboutResource;
 use App\Models\About;

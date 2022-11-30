@@ -90,6 +90,24 @@ const routes = [
         
     },
     {
+        path: '/admin/project/create',
+        component: ()=> import('../components/admin/project/create.vue'),
+        name: 'admin.project.create',
+        meta: { 
+            layout: 'AppLayoutAdmin' 
+        }
+        
+    },
+    {
+        path: '/admin/project/:id/edit',
+        component: ()=> import('../components/admin/project/edit.vue'),
+        name: 'admin.project.edit',
+        meta: { 
+            layout: 'AppLayoutAdmin' 
+        }
+        
+    },
+    {
         path: '/personal',
         component: ()=> import('../components/admin/home/personal.vue'),
         name: 'admin.home.personal',

@@ -92,6 +92,7 @@ export default {
     methods: {
         getInfoAbout() {
             axios.get(`/api/about/${this.$route.params.id}`)
+            
             .then(res => {
                 this.form.id = res.data.data.id
                 this.form.name = res.data.data.name

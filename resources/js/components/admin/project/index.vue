@@ -11,8 +11,10 @@
                             <h1>Projects </h1>
                         </div>
                         <div class="titlebar_item">
-                            <div class="btn btn__open--modal">
-                                New Project
+                            <div class="btn btn-secondary">
+                                <router-link :to="{name: 'admin.project.create'}">
+                                    New Project
+                                </router-link>
                             </div>
                         </div> 
                     </div>
@@ -57,16 +59,16 @@
                         <template v-if="projects">
                             <div v-for="project in projects" :key="project.id" class="project_table-items">
                                 <p>
-                                    <img :src="project.url_image" alt="" class="project_img-list">
+                                    <img :src="project.preview_url" alt="" class="project_img-list">
                                 </p>
                                 <p>{{ project.title }}</p>
                                 <p>{{ project.desc }}</p>
                                 <p>{{ project.link }}</p>
                                 <div>
-                                    <button class="btn-icon success">
+                                    <router-link :to="{name:'admin.project.edit', params: {id:project.id}}" class="btn-icon success" > 
                                         <i class="fas fa-pencil-alt"></i>
-                                    </button>
-                                    <button class="btn-icon danger" >
+                                    </router-link>
+                                    <button class="btn-icon danger" @click.prevent=" deleteProject(project.id)" >
                                         <i class="far fa-trash-alt"></i>
                                     </button>
                                 </div>
@@ -94,13 +96,34 @@ export default {
             .then( res => {
                 this.projects = res.data.data
             })
-        }
-     },
+        },
+        deleteProject(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You can't go back",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33'
+                }).then( res => {
+                    if(res) {
+                        axios.delete(`/api/project/${id}`)
+                        .then( res => {
+                            Swal.fire(
+                                'Delete',
+                                'About Info has deleted successfully',
+                                'success'
+                            )
+                            this.getAllProjects()
+                        })
+                    }
+                })
+            }
+        },
      mounted() {
         this.getAllProjects()
      }
 
 }
 </script>
-<style>
-</style>
+
