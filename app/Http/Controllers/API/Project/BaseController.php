@@ -1,14 +1,14 @@
 <?php
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\API\Project;
 
 use App\Http\Controllers\Controller;
-use App\Services\About\Service;
+use App\Services\Project\ProjectService;
 
 class BaseController extends Controller
 {
     public $service;
 
-    public function __construct(Service $service)
+    public function __construct(ProjectService $service)
     {
         $this->service = $service;
     }

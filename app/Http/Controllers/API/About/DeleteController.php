@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\API\About;
 
-use App\Http\Controllers\API\BaseController;
-use App\Http\Controllers\Controller;
-use App\Http\Resources\About\AboutResource;
+use App\Http\Controllers\API\About\BaseController;
+
 use App\Models\About;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;

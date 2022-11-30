@@ -8,6 +8,7 @@ use App\Http\Controllers\API\About\IndexController as AboutIndexController;
 use App\Http\Controllers\API\About\ShowController as AboutShowController;
 use App\Http\Controllers\API\About\UpdateController as AboutUpdateController;
 use App\Http\Controllers\API\About\DeleteController as AboutDeleteController;
+
 use App\Http\Controllers\API\Service\IndexController as ServiceIndexController;
 use App\Http\Controllers\API\Service\StoreController as ServiceStoreController;
 use App\Http\Controllers\API\Service\ShowController as ServiceShowController;
@@ -31,6 +32,12 @@ use App\Http\Controllers\API\Experience\StoreController as ExperienceStoreContro
 use App\Http\Controllers\API\Experience\ShowController as ExperienceShowController;
 use App\Http\Controllers\API\Experience\UpdateController as ExperienceUpdateController;
 use App\Http\Controllers\API\Experience\DeleteController as ExperienceDeleteController;
+
+use App\Http\Controllers\API\Project\IndexController as ProjectIndexController;
+use App\Http\Controllers\API\Project\StoreController as ProjectStoreController;
+use App\Http\Controllers\API\Project\UpdateController as ProjectUpdateController;
+use App\Http\Controllers\API\Project\ShowController as ProjectShowController;
+use App\Http\Controllers\API\Project\DeleteController as ProjectDeleteController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -87,6 +94,14 @@ Route::middleware('auth:sanctum')->group( function() {
         Route::get('/{experience}', ExperienceShowController::class);
         Route::patch('/{experience}', ExperienceUpdateController::class);
         Route::delete('/{experience}', ExperienceDeleteController::class);
+    });
+
+    Route:: prefix('project')->group( function() {
+        Route::post('/', ProjectStoreController::class);
+        Route::get('/', ProjectIndexController::class);
+        Route::get('/{project}', ProjectShowController::class);
+        Route::patch('/{project}', ProjectUpdateController::class);
+        Route::delete('/{project}', ProjectDeleteController::class);
     });
 
 });

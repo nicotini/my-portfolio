@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\API\About;
 
-use App\Http\Controllers\API\BaseController;
+use App\Http\Controllers\API\About\BaseController;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\About\AboutResource;
 use App\Models\About;
@@ -14,11 +14,12 @@ class IndexController extends BaseController
     {
         
         $aboutInfo = About::latest()->first();
-        if($aboutInfo) {
+       /*  if($aboutInfo) {
             return new AboutResource($aboutInfo);
         } else {
             return response([]);
-        }
+        } */
+        return new AboutResource($aboutInfo);
        
     }
 }

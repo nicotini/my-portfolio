@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\API\About;
+namespace App\Http\Controllers\API\Project;
 
-use App\Http\Controllers\API\About\BaseController;
+use App\Http\Controllers\API\Project\BaseController;
 
-use App\Http\Requests\About\StoreRequest;
+use App\Http\Requests\Project\StoreRequest;
 
 use Illuminate\Http\Request;
-
 
 class StoreController extends BaseController
 {

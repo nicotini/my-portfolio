@@ -72,7 +72,7 @@ export default {
         getAboutInfo() {
                 axios.get('/api/about').then( res => {
                 this.aboutInfo = res.data.data
-                //console.log(res.data.data)
+
            })
             
            
