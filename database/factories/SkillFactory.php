@@ -20,8 +20,6 @@ class SkillFactory extends Factory
             'title' => 'PHP',
             'proficiency' => '90',
             'service_id' => '1'
-
-
         ];
     }
 }

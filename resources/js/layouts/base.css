@@ -1058,7 +1058,13 @@ ul {
 
 .testimonial_img-container{
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  border: solid 1px #a2abb4; 
+  padding: 10px 0;
+  border-radius: 2px;
+  cursor: pointer;
 }
 
 .testimonial_img{

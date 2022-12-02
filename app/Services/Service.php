@@ -44,11 +44,25 @@ class Service
             ->fit(100, 100)
             ->save(storage_path('app/public/images/'. $this->previewName($image)));      
    }
+   public function makeReviewImage($image) {
+      \Intervention\Image\Facades\Image::make($image)
+              ->encode('jpg', 80)
+              ->orientate()
+              ->fit(250, 250)
+              ->save(storage_path('app/public/images/'. $this->fileName($image)));      
+     }
+
+     
 
    public function deleteImage($object) {
             Storage::disk('public')->delete($object->path_image);
             Storage::disk('public')->delete(str_replace('images/', 'images/prev_', $object->path_image));
    }
+
+   public function deleteTestimonialImage($object) {
+      Storage::disk('public')->delete($object->photo_path);
+      
+}
 
    public function deleteDoc($object) 
    {

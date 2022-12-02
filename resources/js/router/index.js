@@ -108,6 +108,33 @@ const routes = [
         
     },
     {
+        path: '/admin/testimonial',
+        component: ()=> import('../components/admin/testimonial/index.vue'),
+        name: 'admin.testimonial.index',
+        meta: { 
+            layout: 'AppLayoutAdmin' 
+        }
+        
+    },
+    {
+        path: '/admin/testimonial/create',
+        component: ()=> import('../components/admin/testimonial/create.vue'),
+        name: 'admin.testimonial.create',
+        meta: { 
+            layout: 'AppLayoutAdmin' 
+        }
+        
+    },
+    {
+        path: '/admin/testimonial/:id/edit',
+        component: ()=> import('../components/admin/testimonial/edit.vue'),
+        name: 'admin.testimonial.edit',
+        meta: { 
+            layout: 'AppLayoutAdmin' 
+        }
+        
+    },
+    {
         path: '/personal',
         component: ()=> import('../components/admin/home/personal.vue'),
         name: 'admin.home.personal',
