@@ -38,6 +38,12 @@ use App\Http\Controllers\API\Project\StoreController as ProjectStoreController;
 use App\Http\Controllers\API\Project\UpdateController as ProjectUpdateController;
 use App\Http\Controllers\API\Project\ShowController as ProjectShowController;
 use App\Http\Controllers\API\Project\DeleteController as ProjectDeleteController;
+
+use App\Http\Controllers\API\Testimonial\IndexController as TestimonialIndexController;
+use App\Http\Controllers\API\Testimonial\StoreController as TestimonialStoreController;
+use App\Http\Controllers\API\Testimonial\ShowController as TestimonialShowController;
+use App\Http\Controllers\API\Testimonial\UpdateController as TestimonialUpdateController;
+use App\Http\Controllers\API\Testimonial\DeleteController as TestimonialDeleteController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -96,12 +102,20 @@ Route::middleware('auth:sanctum')->group( function() {
         Route::delete('/{experience}', ExperienceDeleteController::class);
     });
 
-    Route:: prefix('project')->group( function() {
+    Route::prefix('project')->group( function() {
         Route::post('/', ProjectStoreController::class);
         Route::get('/', ProjectIndexController::class);
         Route::get('/{project}', ProjectShowController::class);
         Route::patch('/{project}', ProjectUpdateController::class);
         Route::delete('/{project}', ProjectDeleteController::class);
+    });
+
+    Route::prefix('testimonial')->group( function() {
+        Route::post('/', TestimonialStoreController::class);
+        Route::get('/', TestimonialIndexController::class);
+        Route::get('/{testimonial}', TestimonialShowController::class);
+        Route::patch('/{testimonial}', TestimonialUpdateController::class);
+        Route::delete('/{testimonial}', TestimonialDeleteController::class);
     });
 
 });
