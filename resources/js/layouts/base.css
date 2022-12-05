@@ -1103,7 +1103,7 @@ ul {
 }
 
 .badge_read {
-  background: #6fc45f;
+  background: #6fc45f !important;
   color: white;
   border-radius: 5px;
   text-align: center;
@@ -1113,7 +1113,7 @@ ul {
 }
 
 .badge_unread {
-  background: #d68a17;
+  background: #d68a17 !important;
   color: white;
   border-radius: 5px;
   text-align: center;

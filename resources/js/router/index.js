@@ -135,6 +135,15 @@ const routes = [
         
     },
     {
+        path: '/admin/message',
+        component: ()=> import('../components/admin/message/index.vue'),
+        name: 'admin.message.index',
+        meta: { 
+            layout: 'AppLayoutAdmin' 
+        }
+        
+    },
+    {
         path: '/personal',
         component: ()=> import('../components/admin/home/personal.vue'),
         name: 'admin.home.personal',
