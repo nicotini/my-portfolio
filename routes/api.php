@@ -44,6 +44,10 @@ use App\Http\Controllers\API\Testimonial\StoreController as TestimonialStoreCont
 use App\Http\Controllers\API\Testimonial\ShowController as TestimonialShowController;
 use App\Http\Controllers\API\Testimonial\UpdateController as TestimonialUpdateController;
 use App\Http\Controllers\API\Testimonial\DeleteController as TestimonialDeleteController;
+
+use App\Http\Controllers\API\Message\IndexController as MessageIndexController;
+use App\Http\Controllers\API\Message\UpdateController as MessageUpdateController;
+use App\Http\Controllers\API\Message\DeleteController as MessageDeleteController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -116,6 +120,11 @@ Route::middleware('auth:sanctum')->group( function() {
         Route::get('/{testimonial}', TestimonialShowController::class);
         Route::patch('/{testimonial}', TestimonialUpdateController::class);
         Route::delete('/{testimonial}', TestimonialDeleteController::class);
+    });
+    Route::prefix('message')->group( function() {
+        Route::get('/', MessageIndexController::class);
+        Route::delete('/{message}', MessageDeleteController::class);
+        Route::patch('/{message}', MessageUpdateController::class);
     });
 
 });

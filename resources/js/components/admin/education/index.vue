@@ -118,7 +118,7 @@
 </template>
 <script>
 import axios from 'axios';
-import { toDisplayString } from 'vue';
+
 
 export default {
     name:"education",
