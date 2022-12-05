@@ -74,6 +74,15 @@
                                 </div>
                             </div>
                         </template>
+                        <div>
+                            <v-pagination
+                                v-model="page"
+                                :pages="pageCount"
+                                :range-size="1"
+                                active-color="#DCEDFF"
+                                @update:modelValue="getAllMessages"
+                            />
+                        </div>
                     </div>   
                 </div>
             </section>
@@ -82,24 +91,32 @@
 </template>
 <script>
 import axios from 'axios';
+import VPagination from "@hennge/vue3-pagination";
+import "@hennge/vue3-pagination/dist/vue3-pagination.css";
 
 
 export default {
+    components: {
+        VPagination
+    },
     name: "index",
     data() {
         return {
             allMessages: {},
-            
-
+            page: 1,
+            pageCount: null
+           
         }
     },
     methods: {
-        getAllMessages() {
-            axios.get('/api/message')
+        getAllMessages(page) {
+            axios.get(`/api/message?page=${page}`)
             .then( res => {
-                this.allMessages = res.data.data
-                console.log(res.data.data)
+               this.pageCount = res.data.pageCount
+                this.allMessages = res.data.paginate
+              
             })
+            
         },
         updateStatus(id, status) {
            const data = new FormData()

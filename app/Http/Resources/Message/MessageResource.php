@@ -20,7 +20,8 @@ class MessageResource extends JsonResource
             'email' => $this->email,
             'subject' => $this->subject,
             'desc' => $this->desc,
-            'status' => $this->status
+            'status' => $this->status,
+            
         ];
     }
 }

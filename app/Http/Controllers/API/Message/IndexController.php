@@ -11,9 +11,13 @@ class IndexController extends Controller
 {
     public function __invoke()
     {
-        $messages = Message::orderBy('id', 'DESC')->get();
+        $messagesPerPage = 4;
+        $messages = Message::paginate($messagesPerPage);
        
-        return MessageResource::collection($messages);
+        return response()->json([
+            'paginate' => MessageResource::collection($messages),
+            'pageCount' => $messages->lastPage()
+        ]);
        
     }
 }
