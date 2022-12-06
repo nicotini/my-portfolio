@@ -81,8 +81,8 @@
 
   <script>
   import axios from 'axios';
-  import router from '../router/index';
-  import store from '../store/index';
+  import router from '../../router/index';
+  import store from '../../store/index';
   import { ref } from 'vue';
   
   export default {
@@ -121,6 +121,8 @@
     
   }
   </script>
-  
   <style scoped>
+  @import '.././../assets/css/base.css';
+  
   </style>
+  

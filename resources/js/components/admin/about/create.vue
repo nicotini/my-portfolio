@@ -151,7 +151,9 @@ export default {
     }
 }
 </script>
-<style>
+<style scoped>
+@import '../../../assets/css/base.css';
+
 .dz-success-mark,
 .dz-error-mark {
     display: none;

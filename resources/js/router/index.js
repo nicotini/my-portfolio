@@ -5,7 +5,9 @@ const routes = [
         path: '/',
         component: ()=> import('../components/pages/home/index.vue'),
         name: 'pages.home.index',
-        
+        meta: {
+            layout: 'AppLayoutMain'
+        }
 
     },
     {

@@ -1,6 +1,6 @@
 <template>
     <div>
- 
+
         <!--==================== MAIN ====================-->
         <main class="main">
             <!-- Side Nav Dummy-->
@@ -387,7 +387,7 @@
     </div>
 </template>
 <script>
-import AppLayoutAdmin from '../../../layouts/AppLayoutAdmin.vue';
+import AppLayoutAdmin from '../../../layouts/adminLayouts/AppLayoutAdmin.vue';
 
 
 export default {
@@ -398,4 +398,5 @@ export default {
    
 }
 
-</script>
+</script >
+

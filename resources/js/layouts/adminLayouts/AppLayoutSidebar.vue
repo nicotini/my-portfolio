@@ -123,7 +123,11 @@
         <!-- End Nav Main -->
 </template>
 <script>
-export default {
-    name: "AppLayoutSidebar"
-}
+    export default {
+        name: "AppLayoutSidebar"
+    }
 </script>
+<style scoped>
+@import '.././../assets/css/base.css';
+
+</style>

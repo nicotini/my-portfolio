@@ -10,14 +10,14 @@ export default {
   name: "AppLayout",
   computed: {
     layout() {
-      const layout = this.$route.meta.layout || defaultLayout
+      /* const layout = this.$route.meta.layout || defaultLayout */
       return this.$route.meta.layout || defaultLayout
     }
   }
 }
 </script>
 <style>
-@import './base.css';
+
 
 
 </style>
