@@ -57,7 +57,6 @@
 </template>
 <script>
 import axios from 'axios'
-
 export default {
     name: "index",
     data() {
@@ -71,7 +70,6 @@ export default {
                 axios.get('/api/about').then( res => {
                 this.aboutInfo = res.data.data
            })
-
         }, 
         deleteAbout(id) {
             Swal.fire({
@@ -104,9 +102,8 @@ export default {
       
         
     }
-
 }
 </script>
 <style scoped>
-    @import '../../../assets/css/base.css';
+    
 </style>

@@ -2,11 +2,11 @@ import './bootstrap';
 
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import 'sweetalert2/dist/sweetalert2.css';
-import "bootstrap/dist/css/bootstrap.min.css"
-import "bootstrap"
-import '../js/assets/js/swiper-bundle.min.js'
-import '../js/assets/css/swiper-bundle.min.css'
-import '../js/assets/js/main.js'
+/* import "bootstrap/dist/css/bootstrap.min.css"
+import "bootstrap" */
+import '../js/assets/js/swiper-bundle.min.js';
+import '../js/assets/css/swiper-bundle.min.css';
+/* import '../js/assets/js/main.js' */
 
 window.Swal = Swal
 const toast = Swal.mixin({

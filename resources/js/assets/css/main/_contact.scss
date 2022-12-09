@@ -1,0 +1,46 @@
+.contact_container{
+    row-gap: 3rem;
+  }
+  
+  .contact_information{
+    display: flex;
+    margin-bottom: $mb-2;
+  }
+  
+  .contact_icon{
+    font-size: 2rem;
+    color: $first-color;
+    margin-right: $mb-0-75;
+  }
+  
+  .contact_title{
+    font-size: $h3-font-size;
+    font-weight: $font-medium;
+  }
+  
+  .contact_subtitle{
+    font-size: $small-font-size;
+    color: $text-color-light;
+  }
+  
+  .contact_content{
+    background-color: $input-color;
+    border-radius: .5rem;
+    padding: .75rem 1rem .25rem;
+  }
+  
+  .contact_label{
+    font-size: $small-font-size;
+    color: $title-color;
+  }
+  
+  .contact_input{
+    width: 100%;
+    background-color: $input-color;
+    color: $text-color;
+    font-family: $body-color;
+    font-size: $normal-font-size;
+    border: none;
+    outline: none;
+    padding: .25rem .5rem .5rem 0;
+  }

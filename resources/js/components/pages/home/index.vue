@@ -1,8 +1,4 @@
 <template>
-
-  
-        
-
         <!--==================== MAIN ====================-->
         <main class="main">
             <!--==================== HOME ====================-->
@@ -209,7 +205,7 @@
                 <div>
                     <!--=========== SKILL 3 ============-->
                     <div class="skills_content skills_open">
-                        <div class="skills_header">
+                        <div class="skills_header" @click.prevent="toggleSkills()">
                             <i class="uil uil-server-network skills_icon"></i>
 
                             <div>
@@ -807,17 +803,106 @@
 </template>
 
 <script>
-/* import '../../../assets/js/main.js';  */
 import AppLayoutMain from '../../../layouts/mainLayouts/AppLayoutMain.vue';
+
 export default {
     name: 'pages.home.index',
     components: {
         AppLayoutMain
-  }
+     },
+     data() {
+        return {
+            swiperTestimonial: null,
+            swiperPortfolio: null,
+            skillsContent: {},
+            itemClass: null,
+            skillsHeader: document.querySelectorAll('.skills_header')
+
+        }
+     },
+     mounted() {
+        this.swiperTestimonial = new Swiper('.testimonial_container', {
+        loop: true,
+        grabCursor: true,
+        spaceBetween: 48,
+        pagination: {
+            el: '.swiper-pagiantion',
+            clickable: true,
+            dynamicBullets: true
+        },
+        breakpoints:{
+            568:{
+            slidesPerView: 2,
+            }
+        }
+        });
+
+        this.swiperPortfolio = new Swiper('.portfolio_container', {
+            cssMode: true,
+            loop: true,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            }
+            }),
+            this.changeTheme()
+            
+            
+            
+
+     },
+     methods: {
+        changeTheme() {
+            const themeButton = document.querySelector('#theme_button')
+            const darkTheme = 'dark-theme'
+            const iconTheme = 'uil-sun'
+
+            //Previously selected topic(if user selected)
+            const selectedTheme = localStorage.getItem('selected-theme')
+            const selectedIcon = localStorage.getItem('selected-icon')
+
+            const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light'
+            const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'bx-moon' : 'bx-sun'
+
+            if (selectedTheme) {
+                document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme)
+                themeButton.classList[selectedIcon === 'uil-moon' ? 'add' : 'remove'](iconTheme)
+                }
+            
+                themeButton.addEventListener('click', () => {
+                document.body.classList.toggle(darkTheme)
+                themeButton.classList.toggle(iconTheme)
+                localStorage.setItem('selected-theme', getCurrentTheme())
+                localStorage.setItem('selected-icon', getCurrentIcon())
+                })
+        },
+                toggleSkills(){
+                  let itemClass = this.parentNode.className
+                    this.skillsContent = document.getElementsByClassName('skills_content')
+                    for(let i = 0; i < this.skillsContent.length; i++){
+                    this.skillsContent[i].className = 'skills_content skills_close'
+                    }
+                    console.log(itemClass)
+                   /*  if (itemClass === 'skills_content skills_close') {
+                    this.parentNode.className = 'skills_content skills_open'
+                    } */
+                    
+
+            }
+            
+
+     }
+
+
+
+
 }
 
 </script>
-<style>
-   
-   @import '../../../assets/css/styles.css'; 
+<style scoped>
+  
 </style>

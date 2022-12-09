@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="client">
         <AppLayoutHeader />
         <slot />
         <AppLayoutFooter />

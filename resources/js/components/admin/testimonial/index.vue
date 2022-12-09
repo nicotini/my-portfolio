@@ -85,7 +85,6 @@
 </template>
 <script>
 import axios from 'axios';
-
 export default {
     name: "index",
     data() {
@@ -126,6 +125,5 @@ export default {
     mounted() {
         this.getAllTestimonials()
     }
-
 }
 </script>

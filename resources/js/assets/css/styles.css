@@ -597,7 +597,7 @@ img {
   margin-bottom: var(--mb-2-5);
 }
 
-.skills_open .skills_arrow{
+.skills_open .skills_arrow {
   transform: rotate(-180deg);
 }
 /*==================== QUALIFICATION ====================*/

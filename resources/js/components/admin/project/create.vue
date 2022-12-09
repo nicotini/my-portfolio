@@ -114,9 +114,7 @@ export default {
     
 } 
 </script>
-<style>
-.dz-success-mark,
-.dz-error-mark {
-    display: none;
-}
+<style scoped>
+
+
 </style>

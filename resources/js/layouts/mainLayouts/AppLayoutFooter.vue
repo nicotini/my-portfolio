@@ -53,7 +53,6 @@ export default {
     name: "AppLayoutFooter"
 }
 </script>
-<style>
-   @import '../../assets/css/swiper-bundle.min.css';
-   @import '../../assets/css/styles.css'; 
+<style scoped>
+   
 </style>

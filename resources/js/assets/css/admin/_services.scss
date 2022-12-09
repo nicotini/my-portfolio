@@ -1,0 +1,37 @@
+.services_container {
+    margin-top: 1rem;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  .service_table-heading {
+    padding: 0 20px;
+    gap: 10px;
+    display: grid;
+    grid-template-columns: 200px 50px 1fr 100px;
+    color: #808891;
+    font-size: 14px;
+    font-weight: 500;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 0.5rem;
+    margin-top: 15px;
+  }
+  
+  .service_table-items {
+    padding: 5px 20px !important;
+    gap: 10px;
+    display: grid;
+    grid-template-columns: 200px 50px 1fr 100px;
+    align-items: center;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 0.6rem 0;
+  }
+  
+  .service_table-icon {
+    background: #5563c1;
+    color: #FFF;
+      width: 35px;
+      height: 35px;
+      border-radius: 50px;
+      align-items: center;
+      border: 1px solid #e0e0e0;
+  }

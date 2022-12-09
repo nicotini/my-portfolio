@@ -96,17 +96,8 @@
                             </span>
                         </router-link>
                     </li>
-                    <li class="nav_item">
-                        <a class="nav_link " href="#">
-                            <span class="nav_link--span--icon">
-                                <i class="fas fa-home nav__link--icon"> </i>
-                            </span>
-                            <span class="nav_link--span--navname">
-                                Users
-                            </span>
-                        </a>
-                    </li>
-                    <li class="nav_item">
+                   
+                    <!-- <li class="nav_item">
                         <a class="nav_link " href="#">
                             <span class="nav_link--span--icon">
                                 <i class="fas fa-home nav__link--icon"> </i>
@@ -115,7 +106,7 @@
                                 Setting
                             </span>
                         </a>
-                    </li>
+                    </li> -->
 
                 </ul>
             </div>
@@ -128,6 +119,5 @@
     }
 </script>
 <style scoped>
-@import '.././../assets/css/base.css';
 
 </style>
