@@ -129,6 +129,10 @@ Route::middleware('auth:sanctum')->group( function() {
 
 });
 
+Route::prefix('main')->group( function() {
+    Route::get('/', [App\Http\Controllers\Main\IndexController::class, 'getServices']);
+});
+
 
 /* Route::post('register', [AuthController::class, 'register']);
     Route::post('login', [AuthController::class, 'login']); */

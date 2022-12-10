@@ -107,14 +107,14 @@
               <span class="section__subtitle">My technical lever</span>
 
               <div class="skills_container container grid">
-                <div>
+                <div v-if="services" v-for="service in services" :key="service.id">
                     <!--=========== SKILL 1 ============-->
                     <div class="skills_content skills_open">
                         <div class="skills_header">
                             <i class="uil uil-brackets-curly skills_icon"></i>
 
                             <div>
-                                <h1 class="skills_title">Frontend developer</h1>
+                                <h1 class="skills_title">{{ service.title }}</h1>
                                 <span class="skills_subtitle">More than 4 years</span>
                             </div>
 
@@ -122,6 +122,7 @@
                         </div>
                         <div class="skills_list grid">
                             <div class="skills_data">
+                               
                                 <div class="skills_titles">
                                     <h3 class="skills_name">HTML</h3>
                                     <span class="skills_number">90%</span>
@@ -150,110 +151,9 @@
                             </div>
                         </div>
                     </div>
-                    <!--=========== SKILL 2 ============-->
-                    <div class="skills_content skills_open">
-                        <div class="skills_header">
-                            <i class="uil uil-server-network skills_icon"></i>
-
-                            <div>
-                                <h1 class="skills_title">Backend developer</h1>
-                                <span class="skills_subtitle">More than 7 years</span>
-                            </div>
-
-                            <i class="uil uil-angle-down skills_arrow"></i>
-                        </div>
-                        <div class="skills_list grid">
-                            <div class="skills_data">
-                                <div class="skills_titles">
-                                    <h3 class="skills_name">PHP</h3>
-                                    <span class="skills_number">80%</span>
-                                </div>
-                                <div class="skills_bar">
-                                    <span class="skills_percentage skills_php"></span>
-                                </div>
-                            </div>
-                            <div class="skills_data">
-                                <div class="skills_titles">
-                                    <h3 class="skills_name">Node J6</h3>
-                                    <span class="skills_number">80%</span>
-                                </div>
-                                <div class="skills_bar">
-                                    <span class="skills_percentage skills_nodejs"></span>
-                                </div>
-                            </div>
-                            <div class="skills_data">
-                                <div class="skills_titles">
-                                    <h3 class="skills_name">Python</h3>
-                                    <span class="skills_number">60%</span>
-                                </div>
-                                <div class="skills_bar">
-                                    <span class="skills_percentage skills_python"></span>
-                                </div>
-                            </div>
-                            <div class="skills_data">
-                                <div class="skills_titles">
-                                    <h3 class="skills_name">Ruby</h3>
-                                    <span class="skills_number">55%</span>
-                                </div>
-                                <div class="skills_bar">
-                                    <span class="skills_percentage skills_ruby"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div>
-                    <!--=========== SKILL 3 ============-->
-                    <div class="skills_content skills_open">
-                        <div class="skills_header" @click.prevent="toggleSkills()">
-                            <i class="uil uil-server-network skills_icon"></i>
-
-                            <div>
-                                <h1 class="skills_title">Designer</h1>
-                                <span class="skills_subtitle">More than 5 years</span>
-                            </div>
-
-                            <i class="uil uil-angle-down skills_arrow"></i>
-                        </div>
-                        <div class="skills_list grid">
-                            <div class="skills_data">
-                                <div class="skills_titles">
-                                    <h3 class="skills_name">Figma</h3>
-                                    <span class="skills_number">90%</span>
-                                </div>
-                                <div class="skills_bar">
-                                    <span class="skills_percentage skills_figma"></span>
-                                </div>
-                            </div>
-                            <div class="skills_data">
-                                <div class="skills_titles">
-                                    <h3 class="skills_name">Sketch</h3>
-                                    <span class="skills_number">85%</span>
-                                </div>
-                                <div class="skills_bar">
-                                    <span class="skills_percentage skills_sketch"></span>
-                                </div>
-                            </div>
-                            <div class="skills_data">
-                                <div class="skills_titles">
-                                    <h3 class="skills_name">Adobe XD</h3>
-                                    <span class="skills_number">80%</span>
-                                </div>
-                                <div class="skills_bar">
-                                    <span class="skills_percentage skills_adobexd"></span>
-                                </div>
-                            </div>
-                            <div class="skills_data">
-                                <div class="skills_titles">
-                                    <h3 class="skills_name">Photoshop</h3>
-                                    <span class="skills_number">85%</span>
-                                </div>
-                                <div class="skills_bar">
-                                    <span class="skills_percentage skills_photoshop"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
               </div>
             </section>
@@ -814,9 +714,10 @@ export default {
         return {
             swiperTestimonial: null,
             swiperPortfolio: null,
-            skillsContent: {},
-            itemClass: null,
-            skillsHeader: document.querySelectorAll('.skills_header')
+            services: {}
+            
+            
+            
 
         }
      },
@@ -849,7 +750,8 @@ export default {
                 clickable: true,
             }
             }),
-            this.changeTheme()
+            this.changeTheme(),
+            this.getServices()
             
             
             
@@ -880,19 +782,16 @@ export default {
                 localStorage.setItem('selected-icon', getCurrentIcon())
                 })
         },
-                toggleSkills(){
-                  let itemClass = this.parentNode.className
-                    this.skillsContent = document.getElementsByClassName('skills_content')
-                    for(let i = 0; i < this.skillsContent.length; i++){
-                    this.skillsContent[i].className = 'skills_content skills_close'
-                    }
-                    console.log(itemClass)
-                   /*  if (itemClass === 'skills_content skills_close') {
-                    this.parentNode.className = 'skills_content skills_open'
-                    } */
-                    
+        getServices() {
+            axios.get('api/main')
+            .then( res => {
+                this.services = res.data.data
+                console.log(this.services)
+            })
+        }
 
-            }
+        
+                
             
 
      }
