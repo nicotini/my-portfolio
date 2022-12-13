@@ -4,15 +4,15 @@
             <!--==================== HOME ====================-->
             <section class="home section" id="home">
                 <div class="home_container container grid">
-                    <div class="home_img">
-                        <img src="assets/img/home.png" alt="">
+                    <div class="home_img" v-if="aboutInfo">
+                        <img :src="aboutInfo.url_image" alt="{{ aboutInfo.name }}">
                     </div>
 
                     <div class="home_data">
-                        <h1 class="home_title">Hi, I'am John Doe</h1>
+                        <h1 class="home_title">Hi, I'am {{ aboutInfo.name }}</h1>
                         <h3 class="home_subtitle">FullStack Web developer</h3>
                         <p class="home_description">
-                            High level experience in web design,fornt-en and backend development, producing quality work.
+                           {{ aboutInfo.desc }}
                         </p>
                         <a href="#contact" class="button button--flex">
                             Contact Me <i class="uil uil-message button__icon"></i>
@@ -50,9 +50,9 @@
                                     <a href="https://www.linkedin.com" target="_blank" class="home_social-icon">
                                         <i class="uil uil-linkedin-alt"></i>
                                     </a>
-                                    <a href="https://www.dribbble.com" target="_blank" class="home_social-icon">
+                                    <!-- <a href="https://www.dribbble.com" target="_blank" class="home_social-icon">
                                         <i class="uil uil-dribbble"></i>
-                                    </a>
+                                    </a> -->
                                     <a href="https://www.github.com" target="_blank" class="home_social-icon">
                                         <i class="uil uil-github-alt"></i>
                                     </a>
@@ -107,10 +107,10 @@
               <span class="section__subtitle">My technical lever</span>
 
               <div class="skills_container container grid">
-                <div v-if="services" v-for="service in services" :key="service.id">
+                <div v-if="services" v-for="service, i in services" :key="service.id" :index="i">
                     <!--=========== SKILL 1 ============-->
-                    <div class="skills_content skills_open">
-                        <div class="skills_header">
+                    <div  class="skills_content skills_open"  @click="serviceAccordion(i)">
+                        <div class="skills_header ">
                             <i class="uil uil-brackets-curly skills_icon"></i>
 
                             <div>
@@ -120,33 +120,15 @@
 
                             <i class="uil uil-angle-down skills_arrow"></i>
                         </div>
-                        <div class="skills_list grid">
+                        <div v-if="service.skills" v-for="skill in service.skills" :key="skill.id" class="skills_list grid">
                             <div class="skills_data">
                                
                                 <div class="skills_titles">
-                                    <h3 class="skills_name">HTML</h3>
-                                    <span class="skills_number">90%</span>
+                                    <h3 class="skills_name">{{ skill.title }}</h3>
+                                    <span class="skills_number">{{skill.proficiency}}%</span>
                                 </div>
                                 <div class="skills_bar">
                                     <span class="skills_percentage skills_html"></span>
-                                </div>
-                            </div>
-                            <div class="skills_data">
-                                <div class="skills_titles">
-                                    <h3 class="skills_name">CSS</h3>
-                                    <span class="skills_number">80%</span>
-                                </div>
-                                <div class="skills_bar">
-                                    <span class="skills_percentage skills_css"></span>
-                                </div>
-                            </div>
-                            <div class="skills_data">
-                                <div class="skills_titles">
-                                    <h3 class="skills_name">JavaScript</h3>
-                                    <span class="skills_number">60%</span>
-                                </div>
-                                <div class="skills_bar">
-                                    <span class="skills_percentage skills_javascript"></span>
                                 </div>
                             </div>
                         </div>
@@ -159,149 +141,44 @@
             </section>
 
             <!--==================== QUALIFICATION ====================-->
-            <section class="qualification section">
+            <section class="qualification section" v-if="educationPlaces || placesToWork">
               <h2 class="section__title">Qualification</h2>
               <span class="section__subtitle">My personal journel</span>
 
-              <div class="qualification_container container">
-                <div class="qualification_tabs">
-                    <div class="qualificaction_button button--flex qualification_active" data-target="#education">
-                      <i class="uil uil-graduation-cap qualification_icon"></i>
-                      Education
+              <div class="timeline">
+                <div class="timeline__event  animated fadeInUp delay-3s timeline__event--type1"  v-for="place in educationPlaces" :key="place.id">
+                    <div class="timeline__event__icon ">
+                    <i class="lni-cake"></i>
+                    <div class="timeline__event__date">
+                        {{ place.period }}
                     </div>
-                    <div class="qualificaction_button button--flex" data-target="#work">
-                     <i class="uil uil-briefcase-alt qualification-icon"></i>
-                     Work
+                    </div>
+                    <div class="timeline__event__content ">
+                    <div class="timeline__event__title">
+                        {{ place.degree}}
+                    </div>
+                    <div class="timeline__event__description">
+                        <p>{{ place.institution }}</p>
+                    </div>
+                    </div>
+                    </div>
+                    <div class="timeline__event  animated fadeInUp delay-3s timeline__event--type1" v-for="work in placesToWork" :key="work.id">
+                        <div class="timeline__event__icon ">
+                            <i class="lni-cake"></i>
+                            <div class="timeline__event__date">
+                                {{ work.period }}
+                            </div>
+                        </div>
+                        <div class="timeline__event__content ">
+                            <div class="timeline__event__title">
+                                {{ work.position}}
+                            </div>
+                            <div class="timeline__event__description">
+                                <p>{{ work.company }}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <div class="qualification_sections">
-                    <!--========== QUALIFICATION CONTENT 1 ==========-->
-                    <div class="qualification_content qualification_active" data-content id="education">
-                      <!--============= QUALIFICATION 1 ===========-->  
-                      <div class="qualification_data">
-                        <div>
-                            <h3 class="qualification_title">Computer Science</h3>
-                            <span class="qualification_subtitle">Germany-University</span>
-                            <div class="qualificaation_calender">
-                                <i class="uil uil-calender-alt"></i>
-                                2009 - 2014
-                            </div>
-                        </div>
-                        <div>
-                            <span class="qualification_rounder"></span>
-                            <span class="qualification_line"></span>
-                        </div>
-                      </div>
-                      <!--============= QUALIFICATION 2 ===========-->  
-                      <div class="qualification_data">
-                        <div></div>
-
-                        <div>
-                            <span class="qualification_rounder"></span>
-                            <span class="qualification_line"></span>
-                        </div>
-
-                        <div>
-                            <h3 class="qualification_title">Web Design</h3>
-                            <span class="qualification_subtitle">Germany-Institute</span>
-                            <div class="qualificaation_calender">
-                                <i class="uil uil-calender-alt"></i>
-                                2014 - 2017
-                            </div>
-                        </div>
-                        
-                      </div>
-                      <!--============= QUALIFICATION 3 ===========-->  
-                      <div class="qualification_data">
-                        <div>
-                            <h3 class="qualification_title">Web Development</h3>
-                            <span class="qualification_subtitle">Germany-Institute</span>
-                            <div class="qualificaation_calender">
-                                <i class="uil uil-calender-alt"></i>
-                                2017 - 2019
-                            </div>
-                        </div>
-                        <div>
-                            <span class="qualification_rounder"></span>
-                            <span class="qualification_line"></span>
-                        </div>
-                      </div>
-                      <!--============= QUALIFICATION 4 ===========-->  
-                      <div class="qualification_data">
-                        <div></div>
-
-                        <div>
-                            <span class="qualification_rounder"></span>
-                            <!--<span class="qualification_line"></span>-->
-                        </div>
-
-                        <div>
-                            <h3 class="qualification_title">Master in UI/UX</h3>
-                            <span class="qualification_subtitle">Germany-Institute</span>
-                            <div class="qualificaation_calender">
-                                <i class="uil uil-calender-alt"></i>
-                                2019 - 2021
-                            </div>
-                        </div>
-                        
-                      </div>
-                    </div>
-                    <!--========== QUALIFICATION CONTENT 2 ==========-->
-                    <div class="qualification_content" data-content id="work">
-                        <!--============= QUALIFICATION 1 ===========-->  
-                        <div class="qualification_data">
-                          <div>
-                              <h3 class="qualification_title">Software Enginner</h3>
-                              <span class="qualification_subtitle">Apple Inc - Germany</span>
-                              <div class="qualificaation_calender">
-                                  <i class="uil uil-calender-alt"></i>
-                                  2016 - 2018
-                              </div>
-                          </div>
-                          <div>
-                              <span class="qualification_rounder"></span>
-                              <span class="qualification_line"></span>
-                          </div>
-                        </div>
-                        <!--============= QUALIFICATION 2 ===========-->  
-                        <div class="qualification_data">
-                          <div></div>
-  
-                          <div>
-                              <span class="qualification_rounder"></span>
-                              <span class="qualification_line"></span>
-                          </div>
-  
-                          <div>
-                              <h3 class="qualification_title">Frontend Developer</h3>
-                              <span class="qualification_subtitle">Apple Inc - Germany</span>
-                              <div class="qualificaation_calender">
-                                  <i class="uil uil-calender-alt"></i>
-                                  2018 - 2020
-                              </div>
-                          </div>
-                          
-                        </div>
-                        <!--============= QUALIFICATION 3 ===========-->  
-                        <div class="qualification_data">
-                          <div>
-                              <h3 class="qualification_title">Ui Designer</h3>
-                              <span class="qualification_subtitle">Figma - Germany</span>
-                              <div class="qualificaation_calender">
-                                  <i class="uil uil-calender-alt"></i>
-                                  2017 - 2019
-                              </div>
-                          </div>
-                          <div>
-                              <span class="qualification_rounder"></span>
-                              <!--<span class="qualification_line"></span>-->
-                          </div>
-                        </div>
-
-                      </div>
-                </div>
-              </div>
             </section>
 
             <!--==================== SERVICES ====================-->
@@ -703,6 +580,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import AppLayoutMain from '../../../layouts/mainLayouts/AppLayoutMain.vue';
 
 export default {
@@ -714,10 +592,11 @@ export default {
         return {
             swiperTestimonial: null,
             swiperPortfolio: null,
-            services: {}
-            
-            
-            
+            aboutInfo: {},
+            educationPlaces: {},
+            placesToWork: {},
+            services: {},
+            isOpen: true
 
         }
      },
@@ -751,13 +630,36 @@ export default {
             }
             }),
             this.changeTheme(),
-            this.getServices()
+            this.getServices(),
+            this.getAboutInfo(),
+            this.getEducationPlaces(),
+            this.getPlacesToWork()
             
             
             
 
      },
      methods: {
+        getAboutInfo() {
+            axios.get('/api/main/about')
+            .then( res => {
+                this.aboutInfo = res.data.data
+            })
+        },
+        getEducationPlaces() {
+            axios.get('/api/main/education')
+            .then( res => {
+                this.educationPlaces = res.data.data
+                
+            })
+        },
+        getPlacesToWork() {
+            axios.get('/api/main/experience')
+            .then( res => {
+                this.placesToWork = res.data.data
+                console.log(this.placesToWork)
+            })
+        },
         changeTheme() {
             const themeButton = document.querySelector('#theme_button')
             const darkTheme = 'dark-theme'
@@ -786,13 +688,15 @@ export default {
             axios.get('api/main')
             .then( res => {
                 this.services = res.data.data
-                console.log(this.services)
-            })
-        }
-
-        
                 
-            
+            })
+        },
+        serviceAccordion(i) {
+            this.services.map((service, i) => {
+                console.log(i)
+            }) 
+           
+        } 
 
      }
 

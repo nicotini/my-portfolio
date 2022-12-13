@@ -1,5 +1,14 @@
 @media screen and (max-width: 767px){
-    .nav_menu{
+  @media (max-width: 786px) {
+    .timeline__event {
+      flex-direction: column;
+    }
+    .timeline__event__icon {
+      border-radius: 4px 4px 0 0;
+    }
+  }  
+  
+  .nav_menu{
       position: fixed;
       background-color: $container-color;
       width: 80%;
@@ -111,7 +120,7 @@
       height: 240px;
       border-radius: 50%;
       overflow: hidden;
-      padding-left: 60px;
+      //padding-left: 60px;
       order: 1;
     }
   
@@ -268,7 +277,7 @@
       height: 340px;
       border-radius: 50%;
       overflow: hidden;
-      padding-left: 80px;
+      //padding-left: 80px;
       order: 1;
     }
   

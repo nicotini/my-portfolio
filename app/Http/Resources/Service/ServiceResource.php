@@ -21,7 +21,7 @@ class ServiceResource extends JsonResource
             'title' => $this->title,
             'icon' => $this->icon,
             'desc' => $this->desc,
-           // 'skills' => SkillResource::collection(),
+           'skills' => SkillResource::collection($this->skills),
             
         ];
     }

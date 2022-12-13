@@ -161,7 +161,7 @@ import axios from 'axios';
                 })
             },
             createSkill() {
-                axios.post('/api/skill/', {
+                axios.post(`/api/skill`, {
                     title: this.form.title,
                     proficiency: this.form.proficiency,
                     service_id: this.form.service_id

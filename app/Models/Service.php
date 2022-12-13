@@ -11,7 +11,7 @@ class Service extends Model
 
     protected $guarded = false;
     protected $table = 'services';
-    protected $with = ['skills'];
+    //protected $with = ['skills'];
     protected $fillable = [
         'title',
         'icon',
@@ -21,6 +21,6 @@ class Service extends Model
 
     public function skills()
     {
-        return $this->hasMany(Skill::class, 'service_id',' id');
+        return $this->hasMany(Skill::class, 'service_id', 'id');
     }
 }

@@ -131,6 +131,9 @@ Route::middleware('auth:sanctum')->group( function() {
 
 Route::prefix('main')->group( function() {
     Route::get('/', [App\Http\Controllers\Main\IndexController::class, 'getServices']);
+    Route::get('/about', [App\Http\Controllers\Main\IndexController::class, 'getAbout']);
+    Route::get('/education', [App\Http\Controllers\Main\IndexController::class, 'getEducations']);
+    Route::get('/experience', [App\Http\Controllers\Main\IndexController::class, 'getExperience']);
 });
 
 
