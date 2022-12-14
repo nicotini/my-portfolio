@@ -97,6 +97,28 @@
         border: 2px solid $first-color;
         z-index: 2;
       }
+      &--type3 {
+        &:before {
+          background: #aff1b6;
+          border-color: #24b47e;
+        }
+        &:after{
+          background: #24b47e;
+    
+        }
+        .timeline__event__date {
+          color: #aff1b6;
+        }
+  
+        .timeline__event__icon {
+          background: #24b47e;
+          color: #24b47e;
+        }
+        .timeline__event__title {
+          color: #24b47e;
+        }
+        
+      }
       
         &:last-child{
   
