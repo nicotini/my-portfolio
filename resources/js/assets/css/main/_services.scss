@@ -39,7 +39,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0,0,0,.5);
+    background-color: rgba(194, 180, 180, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -48,6 +48,8 @@
     opacity: 0;
     visibility: hidden;
     transition: .3s;
+    opacity: 1;
+    visibility: visible;
   }
   
   .services_modal-content{
@@ -85,7 +87,3 @@
     margin-right: $mb-0-25;
   }
   
-  .active_modal{
-    opacity: 1;
-    visibility: visible;
-  }

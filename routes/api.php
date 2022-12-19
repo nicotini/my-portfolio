@@ -134,6 +134,8 @@ Route::prefix('main')->group( function() {
     Route::get('/about', [App\Http\Controllers\Main\IndexController::class, 'getAbout']);
     Route::get('/education', [App\Http\Controllers\Main\IndexController::class, 'getEducations']);
     Route::get('/experience', [App\Http\Controllers\Main\IndexController::class, 'getExperience']);
+    Route::get('/project', [App\Http\Controllers\Main\IndexController::class, 'getProjects']);
+    Route::get('/testimonial', [App\Http\Controllers\Main\IndexController::class, 'getTestimonials']);
 });
 
 

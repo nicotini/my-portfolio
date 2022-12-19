@@ -12,6 +12,7 @@ class ProjectService extends Service {
         unset($data['images']);
         $image = $images[0];
         
+        
         $project = Project::create([
             'title' => $data['title'],
             'desc' => $data['desc'],

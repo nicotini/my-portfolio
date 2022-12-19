@@ -9,7 +9,7 @@ class Service
 {
    public function imageName($image) 
    {
-     return  md5(Carbon::now() . '_' . $image->getClientOriginalName()) . '.' . $image->getClientOriginalExtension();
+     return  md5($image->getClientOriginalName()) . '.' . $image->getClientOriginalExtension();
             
    }
 

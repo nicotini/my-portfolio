@@ -187,118 +187,66 @@
               <span class="section__subtitle">What is offer</span> 
 
               <div class="services_container container grid">
-                <template v-for="service in services" :key="service.id">
+                <template v-for="service, index in services" :key="service.id">
                 <!--============== SERVICES 1 =============-->
                 <div class="services_content">
                     <div>
                         <i class="uil uil-web-grid services_icon"></i>
-                        <h3 class="services_title">{{ service. title }}</h3>
+                        <h3 class="services_title">{{ service.title }}</h3>
                     </div>
-                    <span class="button button--flex button--small button--link services_button">
+                    <span class="button button--flex button--small button--link services_button" @click="showPopupInfo(service, index)">
                         View More
                         <i class="uil uil-arrow-right button_icon"></i>
                     </span>
-
-                    <div class="services_modal">
-                        <div class="services_modal-content">
-                            <h4 class="services_modal-title">{{ service.title }}</h4>
-                            <i class="uil uil-times services_modal-close"></i>
-
-                            <ul class="services_modal-services grid">
-                                <li class="services_modal-service">
-                                    <i class="uil uil-check-circle services_modal-icon"></i>
-                                    <p>I develop the user interface</p>
-                                </li>
-                                <li class="services_modal-service">
-                                    <i class="uil uil-check-circle services_modal-icon"></i>
-                                    <p>Web page development</p>
-                                </li>
-                                <li class="services_modal-service">
-                                    <i class="uil uil-check-circle services_modal-icon"></i>
-                                    <p>I create ux element interactions</p>
-                                </li>
-                                <li class="services_modal-service">
-                                    <i class="uil uil-check-circle services_modal-icon"></i>
-                                    <p>I position your company brand.</p>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                    <modalPopupVue
+                        v-if="isPopupVisible"
+                        @closePopup="closeInfoPopup"
+                        :service="this.chosenService"
+                        :index = "this.chosenIndex"
+                    >
+                        <h4 class="services_modal-title">{{ this.chosenService.title }}</h4>
+                        <div>{{ this.chosenService.desc }}</div>
+                    </modalPopupVue>
                 </div>
                 </template>
               </div>
             </section>
 
             <!--==================== PORTFOLIO ====================-->
-            <section class="portfolio section" id="portfolio">
+            <section class="portfolio section" id="portfolio" v-if="allProjects">
               <h2 class="section__title">Portfolio</h2>  
               <span class="section__subtitle">Most recent work</span>
-
-              <div class="portfolio_container container swiper-container">
-                <div class="swiper-wrapper">
-                    <!--============ PORTFOLIO 1 ==============-->
-                    <div class="portfolio_content grid swiper-slide">
-                        <img src="assets/img/portfolio1.jpeg" alt="" class="portfolio_img">
-
+              <swiper
+                :slides-per-view="3"
+                :space-between="50"
+                navigation
+                :pagination="{ clickable: true }"
+                :scrollbar="{ draggable: true }"
+                @swiper="onSwiper"
+                @slideChange="onSlideChange"
+                >
+                    <swiper-slide
+                    v-for="myPoject in allProjects" 
+                    :key="myPoject.id"
+                    >
+                        <img :src="myPoject.url_image" alt="{{ myPoject.title }}" class="portfolio_img">
                         <div class="portfolio_data">
-                            <h3 class="portfolio_title">Modern Website</h3>
+                            <h3 class="portfolio_title">{{ myPoject.title }}</h3>
                             <p class="portfolio_description">
-                                Website adaptable to all devices,with ui description
-                                and animated interactions.
+                                {{ myPoject.desc }}
                             </p>
-                            <a href="#" class="button button--flex button--small portfolio_button">
-                                Demo 
+                            <a :href="myPoject.link" class="button button--flex button--small portfolio_button">
+                                See the project 
                                 <i class="uil uil-arrow-right button__icon"></i>
                             </a>
                         </div>
-                    </div>
-                    <!--============ PORTFOLIO 2 ==============-->
-                    <div class="portfolio_content grid swiper-slide">
-                        <img src="assets/img/portfolio2.jpeg" alt="" class="portfolio_img">
+                    </swiper-slide>
+              </swiper>
 
-                        <div class="portfolio_data">
-                            <h3 class="portfolio_title">POS App</h3>
-                            <p class="portfolio_description">
-                                POS App description
-                            </p>
-                            <a href="#" class="button button--flex button--small portfolio_button">
-                                Demo 
-                                <i class="uil uil-arrow-right button__icon"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <!--============ PORTFOLIO 3 ==============-->
-                    <div class="portfolio_content grid swiper-slide">
-                        <img src="assets/img/portfolio3.jpeg" alt="" class="portfolio_img">
-
-                        <div class="portfolio_data">
-                            <h3 class="portfolio_title">Online Store</h3>
-                            <p class="portfolio_description">
-                                Website adaptable to all devices,with ui description
-                                and animated interactions.
-                            </p>
-                            <a href="#" class="button button--flex button--small portfolio_button">
-                                Demo 
-                                <i class="uil uil-arrow-right button__icon"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!--Add Arrow-->
-                <div class="swiper-button-next">
-                    <i class="uil uil-angle-right-b swiper-portfolio-icon"></i>
-                </div>
-                <div class="swiper-button-prev">
-                    <i class="uil uil-angle-left-b swiper-portfolio-icon"></i>
-                </div>
-                <!--Add Pagination-->
-                <div class="swiper-pagination"></div>
-              </div>
             </section>
 
             <!--==================== PROJECT IN MIND ====================-->
-            <section class="project section">
+            <section class="project section" >
               <div class="project_bg">
                 <div class="project_container container grid">
                     <div class="project_data">
@@ -309,100 +257,34 @@
                             <i class="uil uil-message project_icon button_icon"></i>
                         </a>
                     </div>
-
-                    <img src="assets/img/home.png" alt="" class="project_img">
+                    <template v-if="aboutInfo">
+                        <img :src="aboutInfo.url_image" alt="" class="project_img">
+                    </template>
                 </div>
               </div>
             </section>
 
             <!--==================== TESTIMONIAL ====================-->
-            <section class="testimonial section">
+            <!-- <section class="testimonial section" v-if="allTestimonials">
               <h2 class="section__title">Testimonial</h2>  
               <span class="section__subtitle">My client saying</span>
 
               <div class="testimonial_container container swiper-container">
                 <div class="swiper-wrapper">
-                    <!--========= TESTIMONIAL 1 ==========-->
-                    <div class="testimonial_content swiper-slide">
-                        <div class="testimonial_data">
-                            <div class="testimonial_header">
-                                <img src="assets/img/testimonial1.jpeg" alt="" class="testimonial_img">
+                    <testimonialItemVue 
+                     v-for="(testimonial, i) in allTestimonials"
+                     :key="testimonial.id"
+                     :index = "i"
+                     :testimonial_data="testimonial"
+                    >
 
-                                <div>
-                                    <h3 class="testimonial_name">Jay Smith</h3>
-                                    <span class="testimonial_client">Client</span>
-                                </div>
-                            </div>
-
-                            <div>
-                                <i class="uil uil-star testimonial_icon-star"></i>
-                                <i class="uil uil-star testimonial_icon-star"></i>
-                                <i class="uil uil-star testimonial_icon-star"></i>
-                                <i class="uil uil-star testimonial_icon-star"></i>
-                                <i class="uil uil-star testimonial_icon-star"></i>
-                            </div>
-                        </div>
-                        <p class="testimonial_description">
-                            I get a good impression,I carry out my project with all the possible
-                            quality and attention and support 24 hours a day.
-                        </p>
-                    </div>
-                    <!--========= TESTIMONIAL 2 ==========-->
-                    <div class="testimonial_content swiper-slide">
-                        <div class="testimonial_data">
-                            <div class="testimonial_header">
-                                <img src="assets/img/testimonial2.jpg" alt="" class="testimonial_img">
-
-                                <div>
-                                    <h3 class="testimonial_name">John Smith</h3>
-                                    <span class="testimonial_client">Client</span>
-                                </div>
-                            </div>
-                            
-                            <div>
-                                <i class="uil uil-star testimonial_icon-star"></i>
-                                <i class="uil uil-star testimonial_icon-star"></i>
-                                <i class="uil uil-star testimonial_icon-star"></i>
-                                <i class="uil uil-star testimonial_icon-star"></i>
-                                <i class="uil uil-star testimonial_icon-star"></i>
-                            </div>
-                        </div>
-                        <p class="testimonial_description">
-                            I get a good impression,I carry out my project with all the possible
-                            quality and attention and support 24 hours a day.
-                        </p>
-                    </div>
-                    <!--========= TESTIMONIAL 3 ==========-->
-                    <div class="testimonial_content swiper-slide">
-                        <div class="testimonial_data">
-                            <div class="testimonial_header">
-                                <img src="assets/img/testimonial3.jpeg" alt="" class="testimonial_img">
-
-                                <div>
-                                    <h3 class="testimonial_name">Mike Smith</h3>
-                                    <span class="testimonial_client">Client</span>
-                                </div>
-                            </div>
-                            
-                            <div>
-                                <i class="uil uil-star testimonial_icon-star"></i>
-                                <i class="uil uil-star testimonial_icon-star"></i>
-                                <i class="uil uil-star testimonial_icon-star"></i>
-                                <i class="uil uil-star testimonial_icon-star"></i>
-                                <i class="uil uil-star testimonial_icon-star"></i>
-                            </div>
-                        </div>
-                        <p class="testimonial_description">
-                            I get a good impression,I carry out my project with all the possible
-                            quality and attention and support 24 hours a day.
-                        </p>
-                    </div>
+                    </testimonialItemVue>
                     
-                </div>
-                <!--Add Pagination-->
+                 </div>
+                
                 <div class="swiper-pagination swiper-pagination-testimonial"></div>
               </div>
-            </section>
+            </section>  -->
 
             <!--==================== CONTACT ME ====================-->
             <section class="contact section" id="contact">
@@ -473,64 +355,55 @@
 <script>
 import axios from 'axios';
 import AppLayoutMain from '../../../layouts/mainLayouts/AppLayoutMain.vue';
+import modalPopupVue from '../../popup/modal-popup.vue';
+import testimonialItemVue from '../../testimonials/testimonial-item.vue';
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import { Autoplay, Pagination, Navigation } from 'swiper'
+import 'swiper/scss';
+
+
 
 export default {
     name: 'pages.home.index',
     components: {
-        AppLayoutMain
+        AppLayoutMain,
+        modalPopupVue,
+        testimonialItemVue,
+        Swiper,
+        SwiperSlide
+        
      },
      data() {
         return {
-            swiperTestimonial: null,
-            swiperPortfolio: null,
+            isPopupVisible: false,
             aboutInfo: {},
             educationPlaces: {},
             placesToWork: {},
             services: {},
-            isOpen: true
+            chosenService: null,
+            chosenIndex: null,
+            isOpen: true,
+            allProjects: {},
+            allTestimonials: {},
+            swiper: null
 
         }
      },
+     
      mounted() {
-        this.swiperTestimonial = new Swiper('.testimonial_container', {
-        loop: true,
-        grabCursor: true,
-        spaceBetween: 48,
-        pagination: {
-            el: '.swiper-pagiantion',
-            clickable: true,
-            dynamicBullets: true
-        },
-        breakpoints:{
-            568:{
-            slidesPerView: 2,
-            }
-        }
-        });
-
-        this.swiperPortfolio = new Swiper('.portfolio_container', {
-            cssMode: true,
-            loop: true,
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            }
-            }),
             this.changeTheme(),
             this.getServices(),
             this.getAboutInfo(),
             this.getEducationPlaces(),
-            this.getPlacesToWork()
-            
-            
-            
-
+            this.getPlacesToWork(),
+            this.getAllProjects(),
+            this.getAllTestimonials()
      },
      methods: {
+        onSwiper(swiper) {
+        this.swiper = swiper;
+        },
+        
         getAboutInfo() {
             axios.get('/api/main/about')
             .then( res => {
@@ -548,7 +421,7 @@ export default {
             axios.get('/api/main/experience')
             .then( res => {
                 this.placesToWork = res.data.data
-                console.log(this.placesToWork)
+                
             })
         },
         changeTheme() {
@@ -584,17 +457,41 @@ export default {
         },
         serviceAccordion(i) {
             this.services.map((service, i) => {
-                console.log(i)
+                
             }) 
            
-        } 
+        },
+        showPopupInfo(service, index) {
+            if(service) {
+                this.chosenService = service
+                this.chosenIndex = index
+            }
+            this.isPopupVisible = true
+        },
+        closeInfoPopup() {
+            this.isPopupVisible = false
+        },
+        getAllProjects() {
+            axios.get(`/api/main/project`)
+            .then( res => {
+                this.allProjects = res.data.data
+               
+            })
+        },
+        getAllTestimonials() {
+            axios.get(`/api/main/testimonial`)
+            .then( res => {
+                this.allTestimonials = res.data.data
+               
+            })
+        }
+        
 
-     }
+        }
+        
 
+    }
 
-
-
-}
 
 </script>
 <style scoped>
