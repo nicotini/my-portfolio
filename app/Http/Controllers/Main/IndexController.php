@@ -56,4 +56,9 @@ class IndexController extends Controller
     {
         return TestimonialResource::collection(Testimonial::orderBy('id', 'DESC')->get()); 
     }
+
+    public function storeMessage()
+    {
+        
+    }
 }

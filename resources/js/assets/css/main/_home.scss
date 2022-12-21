@@ -107,3 +107,7 @@
   .home_social-icon:hover{
     color: $first-color;
   }
+  .buttons-about {
+    display: flex;
+    justify-content: space-evenly;
+  }
