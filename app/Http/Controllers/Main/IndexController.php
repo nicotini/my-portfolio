@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Message\StoreRequest;
 use App\Http\Resources\About\AboutResource;
 use App\Http\Resources\Education\EducationResource;
 use App\Http\Resources\Experience\ExperienceResource;
@@ -12,6 +13,7 @@ use App\Http\Resources\Testimonial\TestimonialResource;
 use App\Models\About;
 use App\Models\Education;
 use App\Models\Experience;
+use App\Models\Message;
 use App\Models\Project;
 use App\Models\Service;
 use App\Models\Testimonial;
@@ -57,8 +59,11 @@ class IndexController extends Controller
         return TestimonialResource::collection(Testimonial::orderBy('id', 'DESC')->get()); 
     }
 
-    public function storeMessage()
+    public function storeMessage(StoreRequest $request)
     {
-        
+         $data = $request->validated();
+         Message::create($data);
+         return response([]);
     }
+   
 }

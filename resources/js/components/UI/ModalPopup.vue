@@ -1,9 +1,9 @@
 <template>
-    <div class="services_modal">
-        <div class="services_modal-content ">
+    <div class="services_modal" v-if="show" @click.stop="hideModal">
+        <div @click.stop class="services_modal-content ">
             
             <i class="uil uil-times services_modal-close"
-            @click="closePopup"
+            @click="hideModal"
             ></i>
             <div>
                 <slot></slot>
@@ -14,11 +14,16 @@
 <script>
 export default {
     name: "modal-popup",
+    props: {
+        show: {
+            type: Boolean,
+            default: false
+        }
+    },
     methods: {
-        closePopup() {
-            this.$emit('closePopup')
+        hideModal() {
+            this.$emit('update:show', false)
         }
     }
-    
 }
 </script>

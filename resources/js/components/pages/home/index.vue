@@ -32,35 +32,10 @@
 
             <!--==================== PORTFOLIO ====================-->
             <section class="portfolio section" id="portfolio" v-if="allProjects">
-              <h2 class="section__title">Portfolio</h2>  
-              <span class="section__subtitle">Most recent work</span>
-              <swiper
-                :slides-per-view="3"
-                :space-between="50"
-                navigation
-                :pagination="{ clickable: true }"
-                :scrollbar="{ draggable: true }"
-                @swiper="onSwiper"
-                @slideChange="onSlideChange"
-                >
-                    <swiper-slide
-                    v-for="myPoject in allProjects" 
-                    :key="myPoject.id"
-                    >
-                        <img :src="myPoject.url_image" alt="{{ myPoject.title }}" class="portfolio_img">
-                        <div class="portfolio_data">
-                            <h3 class="portfolio_title">{{ myPoject.title }}</h3>
-                            <p class="portfolio_description">
-                                {{ myPoject.desc }}
-                            </p>
-                            <a :href="myPoject.link" class="button button--flex button--small portfolio_button">
-                                See the project 
-                                <i class="uil uil-arrow-right button__icon"></i>
-                            </a>
-                        </div>
-                    </swiper-slide>
-              </swiper>
-
+               <portfolio
+               :allProjects="allProjects"
+               >
+                </portfolio>
             </section>
 
             <!--==================== PROJECT IN MIND ====================-->
@@ -105,15 +80,14 @@ import axios from 'axios';
 import AppLayoutMain from '../../../layouts/mainLayouts/AppLayoutMain.vue';
 import ModalPopupVue from '../../UI/ModalPopup.vue';
 import testimonialItemVue from '../../testimonials/testimonial-item.vue';
-import { Swiper, SwiperSlide } from 'swiper/vue';
-import { Autoplay, Pagination, Navigation } from 'swiper'
 import contact from './contact.vue'
 import project from './project.vue'
 import service from './service.vue'
 import qualification from './qualification.vue'
 import skill from './skill.vue'
 import about from './about.vue'
-import 'swiper/scss';
+import portfolio from './portfolio.vue'
+
 
 
 
@@ -124,14 +98,13 @@ export default {
         AppLayoutMain,
         ModalPopupVue,
         testimonialItemVue,
-        Swiper,
-        SwiperSlide,
         contact,
         project,
         service,
         qualification,
         skill,
-        about
+        about,
+        portfolio
         
      },
      data() {
@@ -140,8 +113,7 @@ export default {
             educationPlaces: {},
             placesToWork: {},
             services: {},
-            chosenService: null,
-            chosenIndex: null,
+            
             isOpen: true,
             allProjects: {},
             allTestimonials: {},
@@ -213,14 +185,10 @@ export default {
             .then( res => {
                 this.services = res.data.data
                 
+                
             })
         },
-        serviceAccordion(i) {
-            this.services.map((service, i) => {
-                
-            }) 
-           
-        },
+        
         
         getAllProjects() {
             axios.get(`/api/main/project`)

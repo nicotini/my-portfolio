@@ -29,39 +29,101 @@
                     </div>
                 </div>
             </div>
-
-            <form class="contact_form grid">
+            <form class="contact_form grid" v-if="showForm">
+                <div v-if="errors">
+                <p v-for="(field, k) in errors" :key="k">
+                    
+                    <span v-for="error in field" :key="error">
+                        {{error}}
+                    </span>
+                </p>
+             </div>
                 <div class="contact_inputs grid">
                     <div class="contact_content">
-                        <label for="" class="contact_label">Name</label>
-                        <input type="text" class="contact_input">
+                        <my-input 
+                        label="Name"
+                        type="text"
+                        v-model="form.name" 
+                        class="contact_input"
+                        />
                     </div>
                     <div class="contact_content">
-                        <label for="" class="contact_label">Email</label>
-                        <input type="email" class="contact_input">
+                        <my-input 
+                        label="Email"
+                        type="email" 
+                        v-model="form.email" 
+                        class="contact_input"
+                        />
                     </div>
                 </div>
                 <div class="contact_content">
-                    <label for="" class="contact_label">Project</label>
-                    <input type="tetx" class="contact_input">
+                    <my-input 
+                    label="Subject"
+                    type="email"
+                    v-model="form.subject" 
+                    class="contact_input"
+                    />
                 </div>
                 <div class="contact_content">
-                    <label for="" class="contact_label">Project description</label>
-                    <textarea name="" id="" cols="0" rows="7" class="contact_input"></textarea>
+                    <my-textarea
+                    label="Description"
+                    v-model="form.desc" 
+                    class="contact_input"
+                    ></my-textarea>
                 </div>
                 <div>
-
-                    <my-button>
+                    <my-button
+                    @click.prevent="storeMessage()"
+                    >
                         Send Message
                         <i class="uil uil-message button_icon"></i>
                     </my-button>
                 </div>
             </form>
+            <div class="form-message_send" v-else="messageAfterSend">Your message has been sent!</div>
         </div>
-    
 </template>
 <script>
+import axios from 'axios';
+
 export default {
-    name: 'contact'
+    name: 'contact',
+    data() {
+        return {
+            form: {
+                name: null,
+                email: null,
+                subject: null,
+                desc: null
+            },
+            messageAfterSend: false,
+            showForm: true,
+            errors: {}
+            
+        }
+    },
+    methods: {
+        storeMessage() {
+            axios.post('/api/main', {
+                name: this.form.name,
+                email: this.form.email,
+                subject: this.form.subject,
+                desc: this.form.desc
+            }).then( res => {
+                this.form = {}
+                this.afterSend()
+                
+            }).catch( error => {
+                    if(error.response.status === 422) {
+                        this.errors = error.response.data.errors
+
+                    }
+                })
+        },
+        afterSend() {
+            this.showForm = !this.showForm
+            this.messageAfterSend = !this.messageAfterSend
+    }
+}
 }
 </script>

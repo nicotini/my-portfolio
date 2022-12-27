@@ -15,12 +15,11 @@
                         <i class="uil uil-arrow-right button_icon"></i>
                     </span>
                     <modal-popup
-                        v-if="isPopupVisible"
-                        @closePopup="closeInfoPopup"
+                        v-model:show="isPopupVisible" 
                         :service="this.chosenService"
                         :index = "this.chosenIndex"
                     >
-                        <h4 class="services_modal-title">{{ this.chosenService.title }}</h4>
+                    <h4 class="services_modal-title">{{ this.chosenService.title }}</h4>
                         <div>{{ this.chosenService.desc }}</div>
                     </modal-popup>
                 </div>
@@ -35,10 +34,13 @@ export default {
             type: Object,
             required: true
         }
+       
     },
     data() {
         return {
-            isPopupVisible: false
+            isPopupVisible: false,
+            chosenService: null,
+            chosenIndex: null
         }
     },
     methods: {
@@ -48,10 +50,8 @@ export default {
                 this.chosenIndex = index
             }
             this.isPopupVisible = true
-        },
-        closeInfoPopup() {
-            this.isPopupVisible = false
         }
+        
     }
 }
 </script>
