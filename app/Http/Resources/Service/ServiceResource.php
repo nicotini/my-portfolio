@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources\Service;
 
+use App\Http\Resources\Skill\SkillResource;
+use App\Models\Skill;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ServiceResource extends JsonResource
@@ -18,7 +20,9 @@ class ServiceResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'icon' => $this->icon,
-            'desc' => $this->desc
+            'desc' => $this->desc,
+           'skills' => SkillResource::collection($this->skills),
+            
         ];
     }
 }

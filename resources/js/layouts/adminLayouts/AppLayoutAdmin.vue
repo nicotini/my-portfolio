@@ -7,6 +7,7 @@
   </template>
   
   <script>
+  
   import AppLayoutSidebar from './AppLayoutSidebar.vue';
   import AppLayoutLinks from './AppLayoutLinks.vue'
   export default {
@@ -18,9 +19,4 @@
   }
   </script>
   
-  <style scoped>
-  .header {
-    height: 5rem;
-    background-color: green;
-  }
-  </style>
+  

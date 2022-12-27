@@ -1,13 +1,218 @@
 <template>
-    <div>
-        <h1>
-            welcome main page
-        </h1>
-    </div>
+        <!--==================== MAIN ====================-->
+        <main class="main">
+            <!--==================== HOME ====================-->
+            <section class="home section" id="home">
+                <about
+                :aboutInfo="aboutInfo"
+                ></about>
+            </section>
+            <!--==================== SKILLS ====================-->
+            <section class="skills section" id="skills">
+              <h2 class="section__title">Skills</h2>
+              <span class="section__subtitle">My technical lever</span>
+              <skill
+              :services="services"
+              ></skill>
+            </section>
+
+            <!--==================== QUALIFICATION ====================-->
+            <qualification
+            :educationPlaces="educationPlaces"
+            :placesToWork="placesToWork"
+            ></qualification>
+
+            <!--==================== SERVICES ====================-->
+            <section class="services section" id="services" v-if="services">
+              <service
+              :services="services"
+              >
+              </service>
+            </section>
+
+            <!--==================== PORTFOLIO ====================-->
+            <section class="portfolio section" id="portfolio" v-if="allProjects">
+               <portfolio
+               :allProjects="allProjects"
+               >
+                </portfolio>
+            </section>
+
+            <!--==================== PROJECT IN MIND ====================-->
+            <project
+            :aboutInfo="aboutInfo"
+            ></project>
+
+            <!--==================== TESTIMONIAL ====================-->
+            <!-- <section class="testimonial section" v-if="allTestimonials">
+              <h2 class="section__title">Testimonial</h2>  
+              <span class="section__subtitle">My client saying</span>
+
+              <div class="testimonial_container container swiper-container">
+                <div class="swiper-wrapper">
+                    <testimonialItemVue 
+                     v-for="(testimonial, i) in allTestimonials"
+                     :key="testimonial.id"
+                     :index = "i"
+                     :testimonial_data="testimonial"
+                    >
+
+                    </testimonialItemVue>
+                    
+                 </div>
+                
+                <div class="swiper-pagination swiper-pagination-testimonial"></div>
+              </div>
+            </section>  -->
+
+            <!--==================== CONTACT ME ====================-->
+            <section class="contact section" id="contact">
+                <contact></contact>
+            </section>
+            
+        </main>
+
+
 </template>
+
 <script>
+import axios from 'axios';
+import AppLayoutMain from '../../../layouts/mainLayouts/AppLayoutMain.vue';
+import ModalPopupVue from '../../UI/ModalPopup.vue';
+import testimonialItemVue from '../../testimonials/testimonial-item.vue';
+import contact from './contact.vue'
+import project from './project.vue'
+import service from './service.vue'
+import qualification from './qualification.vue'
+import skill from './skill.vue'
+import about from './about.vue'
+import portfolio from './portfolio.vue'
+
+
+
+
+
 export default {
-    name: "index"
-}
+    name: 'pages.home.index',
+    components: {
+        AppLayoutMain,
+        ModalPopupVue,
+        testimonialItemVue,
+        contact,
+        project,
+        service,
+        qualification,
+        skill,
+        about,
+        portfolio
+        
+     },
+     data() {
+        return {
+            aboutInfo: {},
+            educationPlaces: {},
+            placesToWork: {},
+            services: {},
+            
+            isOpen: true,
+            allProjects: {},
+            allTestimonials: {},
+            swiper: null
+
+        }
+     },
+     
+     mounted() {
+            this.changeTheme(),
+            this.getServices(),
+            this.getAboutInfo(),
+            this.getEducationPlaces(),
+            this.getPlacesToWork(),
+            this.getAllProjects(),
+            this.getAllTestimonials()
+     },
+     methods: {
+        onSwiper(swiper) {
+        this.swiper = swiper;
+        },
+        
+        getAboutInfo() {
+            axios.get('/api/main/about')
+            .then( res => {
+                this.aboutInfo = res.data.data
+            })
+        },
+        getEducationPlaces() {
+            axios.get('/api/main/education')
+            .then( res => {
+                this.educationPlaces = res.data.data
+                
+            })
+        },
+        getPlacesToWork() {
+            axios.get('/api/main/experience')
+            .then( res => {
+                this.placesToWork = res.data.data
+                
+            })
+        },
+        changeTheme() {
+            const themeButton = document.querySelector('#theme_button')
+            const darkTheme = 'dark-theme'
+            const iconTheme = 'uil-sun'
+
+            //Previously selected topic(if user selected)
+            const selectedTheme = localStorage.getItem('selected-theme')
+            const selectedIcon = localStorage.getItem('selected-icon')
+
+            const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light'
+            const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'bx-moon' : 'bx-sun'
+
+            if (selectedTheme) {
+                document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme)
+                themeButton.classList[selectedIcon === 'uil-moon' ? 'add' : 'remove'](iconTheme)
+                }
+            
+                themeButton.addEventListener('click', () => {
+                document.body.classList.toggle(darkTheme)
+                themeButton.classList.toggle(iconTheme)
+                localStorage.setItem('selected-theme', getCurrentTheme())
+                localStorage.setItem('selected-icon', getCurrentIcon())
+                })
+        },
+        getServices() {
+            axios.get('api/main')
+            .then( res => {
+                this.services = res.data.data
+                
+                
+            })
+        },
+        
+        
+        getAllProjects() {
+            axios.get(`/api/main/project`)
+            .then( res => {
+                this.allProjects = res.data.data
+               
+            })
+        },
+        getAllTestimonials() {
+            axios.get(`/api/main/testimonial`)
+            .then( res => {
+                this.allTestimonials = res.data.data
+               
+            })
+        }
+        
+
+        }
+        
+
+    }
+
 
 </script>
+<style scoped>
+  
+</style>

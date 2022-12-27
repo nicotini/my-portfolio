@@ -50,16 +50,13 @@
                                 </div>
                             </div>
                         </template>
-                        </div>
-                    
-                    
+                    </div>
                 </section>
             </div>
     </main>
 </template>
 <script>
 import axios from 'axios'
-
 export default {
     name: "index",
     data() {
@@ -72,10 +69,7 @@ export default {
         getAboutInfo() {
                 axios.get('/api/about').then( res => {
                 this.aboutInfo = res.data.data
-
            })
-            
-           
         }, 
         deleteAbout(id) {
             Swal.fire({
@@ -108,6 +102,8 @@ export default {
       
         
     }
-
 }
 </script>
+<style scoped>
+    
+</style>
