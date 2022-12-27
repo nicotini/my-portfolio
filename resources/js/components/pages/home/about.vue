@@ -14,7 +14,7 @@
                     <my-button>
                         Contact Me <i class="uil uil-message button__icon"></i>
                     </my-button>
-                    <my-button>
+                    <my-button @click.prevent="downloadCV(aboutInfo.id)">
                         Download CV <i class="uil uil-download-alt button_icon"></i>
                     </my-button>
                 </div>
@@ -72,6 +72,19 @@ export default {
             required: true
         }
 
+    },
+    methods: {
+        downloadCV(id) {
+                axios.get(`/api/main/download/${id}`, {responseType: 'blob'})
+                .then( res => {
+                    let  fileURL = window.URL.createObjectURL(new Blob([res.data]));
+                    let  fURL = document.createElement('a');
+                     fURL.href = fileURL;
+                     fURL.setAttribute('download', 'my-cv.pdf');
+                     document.body.appendChild(fURL);
+                     fURL.click();
+                })
+            }
     }
 }
 </script>
