@@ -65,5 +65,12 @@ class IndexController extends Controller
          Message::create($data);
          return response([]);
     }
+
+    public function downloadCV(About $about)
+
+    {
+     $path = public_path('storage/' . $about->path_cv);
+     return response()->download($path);
+    }
    
 }

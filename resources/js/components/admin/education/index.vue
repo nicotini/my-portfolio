@@ -224,6 +224,7 @@ export default {
                     }
                 })  
             }
+           
         },
         mounted() {
             this.getEducations();

@@ -137,7 +137,7 @@ Route::prefix('main')->group( function() {
     Route::get('/project', [App\Http\Controllers\Main\IndexController::class, 'getProjects']);
     Route::get('/testimonial', [App\Http\Controllers\Main\IndexController::class, 'getTestimonials']);
     Route::post('/', [App\Http\Controllers\Main\IndexController::class, 'storeMessage']);
-   
+    Route::get('/download/{about}', [App\Http\Controllers\Main\IndexController::class, 'downloadCV']);
     
 });
 
