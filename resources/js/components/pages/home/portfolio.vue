@@ -8,7 +8,7 @@
         :navigation="true"
         :pagination="{ clickable: true }"
         :scrollbar="{ draggable: true }"
-        
+        :autoplay="{delay: 3000, disableOnInteraction: false}"
         class="data-slider"
         @swiper="onSwiper"
         @slideChange="onSlideChange"

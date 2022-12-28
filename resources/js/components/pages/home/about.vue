@@ -1,7 +1,10 @@
 <template>
     <div class="home_container container grid">
             <div class="home_img" v-if="aboutInfo">
-                <img :src="aboutInfo.url_image" alt="{{ aboutInfo.name }}">
+                <img 
+                :src="aboutInfo.url_image" 
+                :alt="aboutInfo.name"
+                >
             </div>
 
             <div class="home_data">
@@ -17,48 +20,6 @@
                     <my-button @click.prevent="downloadCV(aboutInfo.id)">
                         Download CV <i class="uil uil-download-alt button_icon"></i>
                     </my-button>
-                </div>
-                <div class="home_scroll">
-                    <a href="#about" class="home_scroll-button button--flex"></a>
-                    <i class="uil uil-mouse-alt home_scroll-mouse"></i>
-                    <span class="home_scroll-name">Scroll down</span>
-                    <i class="uil uil-arrow-down home_scroll-arrow"></i>
-                </div>
-                <div class="home_social">
-                    <span class="home_social-follow">Follow Me</span>
-                    <div class="home_social-links">
-                        <a href="https://www.linkedin.com" target="_blank" class="home_social-icon">
-                            <i class="uil uil-linkedin-alt"></i>
-                        </a>
-                        <a href="https://www.dribbble.com" target="_blank" class="home_social-icon">
-                            <i class="uil uil-dribbble"></i>
-                        </a>
-                        <a href="https://www.github.com" target="_blank" class="home_social-icon">
-                            <i class="uil uil-github-alt"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="home_scroll_social">
-                    <div class="home_scroll1">
-                        <a href="#about" class="home_scroll-button button--flex"></a>
-                        <i class="uil uil-mouse-alt home_scroll-mouse"></i>
-                        <span class="home_scroll-name">Scroll down</span>
-                        <i class="uil uil-arrow-down home_scroll-arrow"></i>
-                    </div>
-                    <div class="home_social1">
-                        <div class="home_social-link">
-                            <a href="https://www.linkedin.com" target="_blank" class="home_social-icon">
-                                <i class="uil uil-linkedin-alt"></i>
-                            </a>
-                            <!-- <a href="https://www.dribbble.com" target="_blank" class="home_social-icon">
-                                <i class="uil uil-dribbble"></i>
-                            </a> -->
-                            <a href="https://www.github.com" target="_blank" class="home_social-icon">
-                                <i class="uil uil-github-alt"></i>
-                            </a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

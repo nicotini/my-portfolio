@@ -48,6 +48,7 @@
 <script>
 export default {
     name: "AppLayoutHeader"
+    
 }
 </script>
 <style scoped>

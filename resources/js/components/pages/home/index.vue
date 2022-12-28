@@ -44,26 +44,10 @@
             ></project>
 
             <!--==================== TESTIMONIAL ====================-->
-            <!-- <section class="testimonial section" v-if="allTestimonials">
-              <h2 class="section__title">Testimonial</h2>  
-              <span class="section__subtitle">My client saying</span>
+            <testimonial
+            :allTestimonials="allTestimonials">
 
-              <div class="testimonial_container container swiper-container">
-                <div class="swiper-wrapper">
-                    <testimonialItemVue 
-                     v-for="(testimonial, i) in allTestimonials"
-                     :key="testimonial.id"
-                     :index = "i"
-                     :testimonial_data="testimonial"
-                    >
-
-                    </testimonialItemVue>
-                    
-                 </div>
-                
-                <div class="swiper-pagination swiper-pagination-testimonial"></div>
-              </div>
-            </section>  -->
+            </testimonial>
 
             <!--==================== CONTACT ME ====================-->
             <section class="contact section" id="contact">
@@ -87,6 +71,7 @@ import qualification from './qualification.vue'
 import skill from './skill.vue'
 import about from './about.vue'
 import portfolio from './portfolio.vue'
+import testimonial from './testimonial.vue'
 
 
 
@@ -104,7 +89,8 @@ export default {
         qualification,
         skill,
         about,
-        portfolio
+        portfolio,
+        testimonial
         
      },
      data() {
