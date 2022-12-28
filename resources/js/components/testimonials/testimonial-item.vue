@@ -1,33 +1,33 @@
 <template>
-    <div class="testimonial_content swiper-slide">
-                        <div class="testimonial_data">
-                            <div class="testimonial_header">
-                                <img :src="testimonial_data.url_image" alt="" class="testimonial_img">
-                                <div>
-                                    <h3 class="testimonial_name">{{ testimonial_data.name }}</h3>
-                                    <span class="testimonial_client">{{ testimonial_data.position }}</span>
-                                </div>
-                            </div>
-                            <div class="rating" :data-id="testimonial_data.id">
-                                <div class="rating_body">
-                                    <div class="rating_active"></div>
-                                    <div class="rating_items">
-                                    <input type="radio" class="rating_item" name="rating" value="1">
-                                    <input type="radio" class="rating_item" name="rating" value="1">
-                                    <input type="radio" class="rating_item" name="rating" value="1">
-                                    <input type="radio" class="rating_item" name="rating" value="1">
-                                    <input type="radio" class="rating_item" name="rating" value="1">
-                                    </div>
-                                </div>
-                                <div class="rating_value">
-                                    ({{ testimonial_data.rating }})
-                                </div>
-                            </div>
-                        </div>
-                        <p class="testimonial_description">
-                            {{ testimonial_data.testimony }}
-                        </p>
+    
+        <div class="testimonial_data">
+            <div class="testimonial_header">
+                <img :src="testimonial_data.url_image" alt="" class="testimonial_img">
+                <div>
+                    <h3 class="testimonial_name">{{ testimonial_data.name }}</h3>
+                    <span class="testimonial_client">{{ testimonial_data.position }}</span>
+                </div>
+            </div>
+            <div class="rating" :data-id="testimonial_data.id">
+                <div class="rating_body">
+                    <div class="rating_active"></div>
+                    <div class="rating_items">
+                    <input type="radio" class="rating_item" name="rating" value="1">
+                    <input type="radio" class="rating_item" name="rating" value="1">
+                    <input type="radio" class="rating_item" name="rating" value="1">
+                    <input type="radio" class="rating_item" name="rating" value="1">
+                    <input type="radio" class="rating_item" name="rating" value="1">
                     </div>
+                </div>
+                <div class="rating_value">
+                    ({{ testimonial_data.rating }})
+                </div>
+            </div>
+        </div>
+        <p class="testimonial_description">
+            {{ testimonial_data.testimony }}
+        </p>
+    
 
 </template>
 <script>
