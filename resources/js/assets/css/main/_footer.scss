@@ -3,8 +3,14 @@
   }
   
   .footer_container{
-    row-gap: 3.5rem;
+    row-gap: 3rem;
+   
+
+      ol, ul {
+        padding-left: 0; 
+      }
   }
+  
   .footer_bg{
     background-color: $first-color-second;
     padding: 2rem 0 3rem;
@@ -25,7 +31,7 @@
     row-gap: 1.5rem;
   }
   
-  .footer_link:hover{
+  .footer_link a:hover{
     color: $first-color-lighter
   }
   
@@ -47,7 +53,7 @@
   
   .footer_title,
   .footer_subtitle,
-  .footer_link,
+  .footer_link a,
   .footer_social{
     color: #FFF;
   }
@@ -55,7 +61,7 @@
 .scrollup{
     position: fixed;
     right: 1rem;
-    bottom: -20%;
+    bottom: 20px;
     background-color: $first-color;
     opacity: .8;
     padding: 0 .3rem;
@@ -71,6 +77,12 @@
   .scrollup_icon{
     font-size: 1.5rem;
     color: #FFF;
+  }
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
   }
   
   /* Show scroll */

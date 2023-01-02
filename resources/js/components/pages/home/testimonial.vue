@@ -6,6 +6,7 @@
         <swiper
         :modules="modules"
         :slides-per-view="2"
+        :breakpoints="swiperOptions.breakpoints"
         :space-between="50"
         :pagination="{ clickable: true }"
         :scrollbar="{ draggable: true }"
@@ -45,20 +46,38 @@ export default {
             type: Object,
             required: true
         }
+        
     },
     data() {
         return {
-        modules: [Autoplay, Pagination]
+        modules: [Autoplay, Pagination],
+        swiperOptions: {
+            breakpoints: {
+                320: {       
+                    slidesPerView: 1,
+                    spaceBetween: 50     
+                },
+                640: {       
+                    slidesPerView: 1,
+                    spaceBetween: 50     
+                },
+                1200: {
+                    slidesPerView: 2,
+                    spaceBetween: 50   
+                },
+                
+            }
+        }
       }
 
         
     },
     methods: {
     onSwiper(swiper) {
-      console.log(swiper);
+      
     },
     onSlideChange() {
-      console.log("slide change");
+      
     },
   }
     

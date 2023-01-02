@@ -13,15 +13,11 @@
                     </p>
                 </div>
                 <ul class="footer_links">
-                    <li>
-                        <a href="#services" class="footer_link">Services</a>
-                    </li>
-                    <li>
-                        <a href="#portfolio" class="footer_link">Portfolio</a>
-                    </li>
-                    <li>
-                        <a href="#contact" class="footer_link">Cantact Me</a>
-                    </li>
+                    <menu-item
+                     :menuItem="item"
+                     class="footer_link"
+                     v-for="item in items"
+                    />
                 </ul>
                 <div class="footer_socails">
                     <a href="https://www.facebook.com" target="_blank" class="footer_social">
@@ -35,22 +31,72 @@
                     </a>
                 </div>
             </div>
-            <p class="footer_copy">&#169; Share Tutorials. All right reserved</p>
+            <p class="footer_copy">&#169; {{ year }}</p>
           </div>
         </footer>
         
         <!--==================== SCROLL TOP ====================-->
-        <a href="#" class="scrollup" id="scroll-up">
+        
+    
+ 
+    <transition name="fade">
+        <a href="#" class="scrollup" id="scroll-up" v-if="buttonShow" @click.prevent="scrollUp()">
           <i class="uil uil-arrow-up scrollup_icon"></i>
         </a>
+     </transition>
         
 
 </template>
 <script>
-import '../../assets/js/swiper-bundle.min.js';
-/* import '../../assets/js/main.js'; */
 export default {
-    name: "AppLayoutFooter"
+    name: "AppLayoutFooter",
+    data() {
+        return {
+            items: [
+                {
+                    name: "services",
+                    label: "Services",
+                    to: "#services"
+                },
+                {
+                    name: "portfolio",
+                    label: "Portfolio",
+                    to: "#portfolio"
+                },
+                {
+                    name: "contact",
+                    label: "Contact",
+                    to: "#contact"
+                }
+
+            ],
+            year: '',
+            buttonShow: false
+        }
+       
+        
+    },
+    methods: {
+        printYear() {
+            return new Date().getFullYear();
+        },
+        checkScrollPosition() {
+            this.buttonShow = window.pageYOffset > 10;
+        },
+        scrollUp() {
+            scroll({
+            top: 0,
+            behavior: "smooth"
+            })
+        }
+
+        
+    },
+    mounted() {
+        this.year = this.printYear(),
+        this.checkScrollPosition(),
+        window.addEventListener('scroll', this.checkScrollPosition)
+    }
 }
 </script>
 <style scoped>

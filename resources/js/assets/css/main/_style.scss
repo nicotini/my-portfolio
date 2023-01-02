@@ -72,7 +72,9 @@ body.dark-theme{
   html {
     scroll-behavior: smooth;
     font-size: 1.1rem;
+   
   }
+  
   
 ul {
   list-style: none;
@@ -132,6 +134,7 @@ img {
         max-width: 968px;
         margin-left: $mb-1-5;
         margin-right: $mb-1-5;
+        width: unset;
       }
       
       .grid {
@@ -184,9 +187,10 @@ img {
       .nav_close{
         font-size: 1.5rem;
         position: absolute;
-        top: 1rem;
-        right: 1.25rem;
+        top: 0.3rem;
+        right: 1.9rem;
         cursor: pointer;
+        
       }
       
       .nav_list{
@@ -199,6 +203,7 @@ img {
         color: $title-color;
         font-weight: $font-medium;
         transition: .3s;
+        text-transform: capitalize;
       }
       
       .nav_link:hover{

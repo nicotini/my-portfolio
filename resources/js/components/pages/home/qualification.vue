@@ -1,5 +1,5 @@
 <template>
-    <section class="qualification section" v-if="educationPlaces || placesToWork">
+    <section class="qualification section" id="qualification" v-if="educationPlaces || placesToWork">
         <h2 class="section__title">Qualification</h2>
         <span class="section__subtitle">My personal journel</span>
 
