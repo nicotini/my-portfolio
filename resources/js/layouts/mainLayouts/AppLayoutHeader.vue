@@ -10,6 +10,7 @@
                 <ul class="nav_list"  v-if="items.length >0">
                     <menu-item
                      class="nav_link"
+                     @smoothScroll="smoothScrollItem"
                      :menuItem="item"
                      v-for="item in items"
                     />
@@ -73,18 +74,21 @@ export default {
 
             ],
             showMenu: false,
-            width: null
+            width: null,
+            
         }
     },
+    
     methods: {
         showMobileMenu() {
             if(!this.showMenu) {
                 this.showMenu = true
-            } else {
+            }  else {
                 this.showMenu = false
             }
             
         },
+        
        
         updateWidth() {
             this.width = window.innerWidth;
@@ -95,13 +99,22 @@ export default {
                 this.showMobileMenu()
             }
             
+        },
+        smoothScrollItem(item) {
+                window.scrollTo({
+                top: document.querySelector(item).offsetTop,
+                behavior: 'smooth'
+                })
+               
+               this.updateWidth()
+                
         }
     },
     created() {
     window.addEventListener('resize', this.updateWidth);
     this.updateWidth();
    
-  },
+  }
 }
 </script>
 <style scoped>

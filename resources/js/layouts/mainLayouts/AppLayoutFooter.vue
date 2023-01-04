@@ -3,8 +3,8 @@
     <footer class="footer">
           <div class="footer_bg">
             <div class="footer_container container grid">
-                <div>
-                    <h1 class="footer_title">John Doe</h1>
+                <div v-if="aboutInfo">
+                    <h1 class="footer_title">{{ aboutInfo.name }}</h1>
                     <span class="footer_subtitle">FullStack Web developer</span>
                     <p class="footer_subtitle">
                         High level experience in web design,
@@ -75,6 +75,13 @@ export default {
         }
        
         
+    },
+    props: {
+        aboutInfo: {
+            type: Object,
+            required: true
+        }
+
     },
     methods: {
         printYear() {

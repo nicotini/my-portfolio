@@ -109,7 +109,6 @@ export default {
      },
      
      mounted() {
-            this.changeTheme(),
             this.getServices(),
             this.getAboutInfo(),
             this.getEducationPlaces(),
@@ -142,30 +141,7 @@ export default {
                 
             })
         },
-        changeTheme() {
-            const themeButton = document.querySelector('#theme_button')
-            const darkTheme = 'dark-theme'
-            const iconTheme = 'uil-sun'
-
-            //Previously selected topic(if user selected)
-            const selectedTheme = localStorage.getItem('selected-theme')
-            const selectedIcon = localStorage.getItem('selected-icon')
-
-            const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light'
-            const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'bx-moon' : 'bx-sun'
-
-            if (selectedTheme) {
-                document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme)
-                themeButton.classList[selectedIcon === 'uil-moon' ? 'add' : 'remove'](iconTheme)
-                }
-            
-                themeButton.addEventListener('click', () => {
-                document.body.classList.toggle(darkTheme)
-                themeButton.classList.toggle(iconTheme)
-                localStorage.setItem('selected-theme', getCurrentTheme())
-                localStorage.setItem('selected-icon', getCurrentIcon())
-                })
-        },
+        
         getServices() {
             axios.get('api/main')
             .then( res => {
