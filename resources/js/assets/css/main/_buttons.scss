@@ -1,27 +1,27 @@
 //BUTTONS 
 .button{
     display: inline-block;
-    background-color: $first-color;
+    background-color: var(--first-color);
     color: #FFF;
     padding: 1rem;
     border-radius: .5rem;
-    font-weight: $font-medium;
+    font-weight: var(--font-medium);
     cursor: pointer;
   }
   
   .button:hover{
-    background-color: $first-color-alt;
+    background-color: var(--first-color-alt);
   }
   
   .button_icon{
     font-style: 1.25rem;
-    margin-left: $mb-0-5;
+    margin-left: var(--mb-0-5);
     transition: .3s;
   }
   
   .button--white{
     background-color: #FFF;
-    color: $first-color;
+    color: var(--first-color);
   }
   
   .button--white:hover{
@@ -31,6 +31,7 @@
   .button--flex{
     display: inline-flex;
     align-items: center;
+    margin-bottom: 10px;
   }
   
   .button--small{
@@ -40,10 +41,10 @@
   .button--link{
     padding: 0;
     background-color: transparent;
-    color: $first-color;
+    color: var(--first-color);
   }
   
   .button--link:hover{
     background-color: transparent;
-    color: $first-color-alt;
+    color: var(--first-color-alt);
   }

@@ -3,17 +3,17 @@
   }
   
   .project_bg{
-    background-color: $first-color-second;
+    background-color: var(--first-color-second);
     padding-top: 3rem;
   }
   
   .project_title{
-    font-size: $h2-font-size;
-    margin-bottom: $mb-0-75;
+    font-size: var(--h2-font-size);
+    margin-bottom: var(--mb-0-75);
   }
   
   .project_description{
-    margin-bottom: $mb-1-5;
+    margin-bottom: var(--mb-1-5);
   }
   
   .project_title,

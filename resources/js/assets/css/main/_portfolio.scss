@@ -10,6 +10,8 @@
     display: flex;
     justify-content: center;
     align-items: flex-center;
+    flex-direction: column;
+    justify-content: center;
   }
   
   .portfolio_img{
@@ -19,15 +21,16 @@
   }
   
   .portfolio_title{
-    font-size: $h3-font-size;
-    margin-bottom: $mb-0-5;
+    font-size: var(--h3-font-size);
+    margin-bottom: var(--mb-0-5);
   }
   
   .portfolio_description{
-    margin-bottom: $mb-0-75;
+    margin-bottom: var(--mb-0-75);
   }
+
   .swiper-pagination-bullet-active{
-    background-color: $first-color;
+    background-color: var(--first-color);
   }
   .swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal {
     bottom: -5px;
@@ -73,6 +76,6 @@
   }
   .swiper-button-next,
   .swiper-button-prev {
-    color: $first-color;
+    color: var(--first-color);
     cursor: pointer;
   }
