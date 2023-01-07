@@ -13,6 +13,7 @@
                      @smoothScroll="smoothScrollItem"
                      :menuItem="item"
                      v-for="item in items"
+                     :key="item.to"
                     />
                 </ul>
 
@@ -23,7 +24,13 @@
 
             <div class="nav_btns">
                 <!--===== THEME CHANGE BUTTON =====-->
-                <i class="uil uil-moon change_theme" id="theme_button"></i>
+                <i class="uil uil-moon change_theme" 
+                :class="[
+                    darkTheme ? 'uil-sun' : ''
+                ]"
+                id="theme_button"
+                @click="changeTheme()"
+                ></i>
 
                 <div class="nav_toogle" id="nav-toggle" @click="showMobileMenu()">
                     <i class="script.uil uil-bars"></i>
@@ -75,7 +82,10 @@ export default {
             ],
             showMenu: false,
             width: null,
+            darkTheme: false
+           
             
+           
         }
     },
     
@@ -88,8 +98,6 @@ export default {
             }
             
         },
-        
-       
         updateWidth() {
             this.width = window.innerWidth;
             if(this.width > 849) {
@@ -98,17 +106,21 @@ export default {
                 this.showMenu = false
                 this.showMobileMenu()
             }
-            
         },
         smoothScrollItem(item) {
                 window.scrollTo({
                 top: document.querySelector(item).offsetTop,
                 behavior: 'smooth'
                 })
-               
                this.updateWidth()
-                
+        },
+        changeTheme() {
+            const darkTheme = 'dark-theme'
+            this.darkTheme = !this.darkTheme
+            document.body.classList.toggle(darkTheme)
         }
+       
+
     },
     created() {
     window.addEventListener('resize', this.updateWidth);
@@ -117,6 +129,3 @@ export default {
   }
 }
 </script>
-<style scoped>
-  
-</style>

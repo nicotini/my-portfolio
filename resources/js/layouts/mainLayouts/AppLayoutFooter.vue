@@ -3,32 +3,27 @@
     <footer class="footer">
           <div class="footer_bg">
             <div class="footer_container container grid">
-                <div v-if="aboutInfo">
-                    <h1 class="footer_title">{{ aboutInfo.name }}</h1>
-                    <span class="footer_subtitle">FullStack Web developer</span>
-                    <p class="footer_subtitle">
-                        High level experience in web design,
-                        front-end and backend development,
-                        producing quality work
-                    </p>
+                <div>
+                    <h1 class="footer_title">Vasiuk Olena</h1>
+                    <span class="footer_subtitle">PHP FullStack developer</span>
                 </div>
                 <ul class="footer_links">
                     <menu-item
                      :menuItem="item"
+                     @smoothScroll="ScrollToItem"
                      class="footer_link"
                      v-for="item in items"
+                     :key="item.to"
                     />
                 </ul>
                 <div class="footer_socails">
-                    <a href="https://www.facebook.com" target="_blank" class="footer_social">
-                        <i class="uil uil-facebook-f"></i>
+                    <a href="!#" target="_blank" class="footer_social">
+                        <i class="uil uil-github-alt"></i>
                     </a>
-                    <a href="https://www.instagram.com" target="_blank" class="footer_social">
-                        <i class="uil uil-instagram"></i>
+                    <a href="!#" target="_blank" class="footer_social">
+                        <i class="uil uil-linkedin-alt"></i>
                     </a>
-                    <a href="https://www.twitter.com" class="footer_social">
-                        <i class="uil uil-twitter-alt"></i>
-                    </a>
+                    
                 </div>
             </div>
             <p class="footer_copy">&#169; {{ year }}</p>
@@ -76,13 +71,7 @@ export default {
        
         
     },
-    props: {
-        aboutInfo: {
-            type: Object,
-            required: true
-        }
-
-    },
+    
     methods: {
         printYear() {
             return new Date().getFullYear();
@@ -95,6 +84,12 @@ export default {
             top: 0,
             behavior: "smooth"
             })
+        },
+        ScrollToItem(item) {
+            window.scrollTo({
+                top: document.querySelector(item).offsetTop,
+                behavior: 'smooth'
+                })
         }
 
         

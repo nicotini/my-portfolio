@@ -1,13 +1,13 @@
 
   .qualification_title{
-    font-size: $normal-font-size;
-    font-weight: $font-medium;
+    font-size: var(--normal-font-size);
+    font-weight: var(--font-medium);
   }
   
   .qualification_subtitle{
     display: inline-block;
-    font-size: $small-font-size;
-    margin-bottom: $mb-1;
+    font-size: var(--small-font-size);
+    margin-bottom: var(--mb-1);
   }
   .timeline {
     display: flex;
@@ -32,7 +32,7 @@
         text-transform: uppercase;
   
         font-weight: 600;
-        color: $first-color;
+        color: var(--first-color);
         letter-spacing: 1.5px;
       }
       &__content {
@@ -47,13 +47,13 @@
       }
       &__icon {
         border-radius: 8px 0 0 8px;
-        background: $first-color;
+        background: var(--first-color);
         display: flex;
         align-items: center;
         justify-content: center;
         flex-basis: 40%;
         font-size: 2rem;
-        color: $first-color;
+        color: var(--first-color);
         padding: 20px;
   
         i {
@@ -73,7 +73,7 @@
         content: "";
         width: 2px;
         height: 135%;
-        background: $first-color;
+        background: var(--first-color);
         position: absolute;
         top: 52%;
         // transform: translateY(-50%);
@@ -94,7 +94,7 @@
         // right: 90%;
         top: 50%;
         transform: translateY(-50%);
-        border: 2px solid $first-color;
+        border: 2px solid var(--first-color);
         z-index: 2;
       }
       &--type3 {

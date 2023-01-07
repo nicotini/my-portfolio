@@ -2,16 +2,16 @@
 @media screen and (max-width: 850px) {
   .nav_menu{
     position: fixed;
-    background-color: $container-color;
+    background-color: var(--container-color);
     width: 80%;
     height: 100%;
     top: 0;
     right: -100%;
-    box-shadow: -2px 0 4px hsla($hue-color, 24%, 15%, .1) ;
+    box-shadow: -2px 0 4px hsla(var(--hue-color), 24%, 15%, .1) ;
     padding: 4rem 0 0 3rem;
     border-radius: 1rem 0 0 1rem;
     transition: .3s;
-    z-index: $z-fixed;
+    z-index: var(--z-fixed);
     right: 0;
     
   }
@@ -40,8 +40,8 @@
 
 @media screen and (max-width: 350px){
     .container{
-      margin-left: $mb-1;
-      margin-right: $mb-1;
+      margin-left: var(--mb-1);
+      margin-right: var(--mb-1);
     }
   
     .nav_menu{
@@ -66,7 +66,7 @@
     }
   
     .skills_title{
-      font-size: $normal-font-size;
+      font-size: var(--normal-font-size);
     }
   
     .qualification_data{
@@ -99,7 +99,7 @@
   
     .testimonial_img{
       margin-right: 0;
-      margin-bottom: $mb-0-25;
+      margin-bottom: var(--mb-0-25);
     }
   
     .testimonial_data,
@@ -132,7 +132,7 @@
   
     .home_img{
       justify-self: center;
-      background-color: $first-color;
+      background-color: var(--first-color);
       width: 240px;
       height: 240px;
       border-radius: 50%;
@@ -192,7 +192,7 @@
     }
   
     .nav{
-      height: calc($header-height + 1.5rem);
+      height: calc(var(--header-height) + 1.5rem);
       column-gap: 3rem;
     }
     .nav_toggle
@@ -245,7 +245,7 @@
     }
   
     .nav{
-      height: calc($header-height + 1.5rem);
+      height: calc(var(--header-height) + 1.5rem);
       column-gap: 1rem;
     }
   
@@ -293,7 +293,7 @@
   
     .home_img{
       justify-self: center;
-      background-color: $first-color;
+      background-color: var(--first-color);
       width: 340px;
       height: 340px;
       border-radius: 50%;
@@ -332,7 +332,7 @@
     }
   
     .qualification_button{
-      margin: 0 $mb-1;
+      margin: 0 var(--mb-1);
     }
   
     .qualification_sections{
@@ -374,7 +374,7 @@
     }
   
     .project_container{
-      background-color: $first-color-second;
+      background-color: var(--first-color-second);
       border-radius: 1rem;
       padding: 3rem 2.5rem 0;
       grid-template-columns: 1fr max-content;
@@ -410,7 +410,7 @@
     /*For x-large devices */
     @media screen and (min-width: 1024px){
       body{
-        font-size: $font-medium;
+        font-size: var(--font-medium);
       }
   
       .header,
