@@ -204,7 +204,9 @@ router.beforeEach( (to,from,next) => {
 
     if(to.name === 'auth.login' || to.name === 'auth.register' && token) {
         return next({name: 'admin.home.index'})
+    } else {
+        next()
     }
-    next()
+    
 })
 export default router
