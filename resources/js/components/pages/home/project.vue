@@ -26,7 +26,7 @@ export default {
     props: {
         aboutInfo: {
             type: Object,
-            required: true
+            required: false
         }
     }
 }
