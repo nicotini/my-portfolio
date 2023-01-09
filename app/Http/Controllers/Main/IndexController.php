@@ -24,7 +24,12 @@ class IndexController extends Controller
 
     public function getAbout()
     {
-        return new AboutResource(About::latest()->first());
+        $aboutInfo = About::latest()->first();
+        if($aboutInfo) {
+            return new AboutResource($aboutInfo);
+        } else {
+            return response([]);
+        }
     }
 
     public function getEducations()
